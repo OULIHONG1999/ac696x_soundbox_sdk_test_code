@@ -49,6 +49,23 @@ make clean
 | `cpu/br25/audio_dec/` | 音频解码模块 |
 | `cpu/br25/audio_effect/` | 音频效果处理 |
 
+## 调试注意事项
+
+### DP脚日志打印
+
+**文件位置**: `apps/soundbox/board/br25/board_ac696x_demo/board_ac696x_demo.c`
+
+当使用 DP 脚作为日志打印引脚时，需要在电源唤醒初始化后重新初始化调试串口：
+
+```c
+printf("board_power_wakeup_init\n");
+power_wakeup_init(&wk_param);
+debug_uart_init(NULL);  // 重新初始化，防止DP引脚被重新配置导致无日志输出
+printf("board_power_wakeup_init ok\n");
+```
+
+**原因**: `power_wakeup_init()` 可能会重新配置引脚，导致之前配置的 DP 脚日志输出功能失效。
+
 ## 添加用户代码
 
 在 `apps/src/` 下按功能创建文件夹，然后在 `apps/src/Makefile` 中添加源文件路径即可。
