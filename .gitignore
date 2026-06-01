@@ -1,0 +1,34 @@
+#全局生效
+*.o
+*.orig
+*.depend
+*.layout
+*.bc
+
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# vscode配置文件
+.vscode/settings.json
+
+#客户发布文件
+release/
+
+#各系列忽略文件
+
+#696音箱
+
+#701音箱
+obj/
+objs/
