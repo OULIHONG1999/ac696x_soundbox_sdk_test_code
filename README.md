@@ -176,13 +176,61 @@ void led_effect_show_status(void);         // 打印当前状态
 
 ---
 
-## 按键事件拦截
+## 按键系统
+
+### IO 按键事件表
+
+**文件位置**: `apps/soundbox/board/br25/board_ac696x_demo/key_table/iokey_table.c`
+
+按键事件不是"按下/释放两个通用事件"，而是由**事件表**定义的。每列代表一类操作，配了什么值才发什么事件：
+
+| 列 | 触发条件 | 例子 | KEY_NULL 时 |
+|:--:|:---------|:----:|:-----------:|
+| **单击** | 按下后短时间松开 | `KEY_MUSIC_PP` | 不产生事件 |
+| **长按** | 按住超过 `long_time` | `KEY_CALL_HANG_UP` | 不发 |
+| **hold** | 长按中持续触发（循环） | `KEY_VOL_UP` | 不发（不循环） |
+| **抬起** | 松开按键 | — | 不发 |
+| **双击** | 快速按两次 | `KEY_CALL_LAST_NO` | 不发 |
+| **三击** | 快速按三次 | — | 不发 |
+
+当前配置：
+
+```c
+[0] = {
+    KEY_MUSIC_PP,      // 单击
+    KEY_CALL_HANG_UP,  // 长按
+    KEY_NULL,           // hold（不循环）
+    KEY_NULL,           // 抬起（不触发）
+    KEY_CALL_LAST_NO,  // 双击
+    KEY_NULL            // 三击
+},
+[1] = {
+    KEY_MUSIC_NEXT,    // 单击
+    KEY_VOL_UP,        // 长按
+    KEY_VOL_UP,        // hold（长按中持续发）
+    KEY_NULL,           // 抬起
+    KEY_NULL,           // 双击
+    KEY_NULL            // 三击
+},
+```
+
+所以要实现"长按→开，松开→关"，需要在**抬起列**配一个事件值：
+```c
+[0] = {
+    KEY_MUSIC_PP,       // 单击
+    KEY_MUSIC_PP,       // 长按（按下进直通）
+    KEY_NULL,
+    KEY_MUSIC_PREV,     // 抬起（松开关直通）
+    KEY_CALL_LAST_NO,   // 双击
+    KEY_NULL,
+},
+```
+
+### 按键事件拦截
 
 **文件位置**: `apps/src/key_handler/key_handler.c`
 
-### 原理
-
-SDK 提供 `SYS_EVENT_HANDLER` 宏，可以在任意 .c 文件中注册系统事件监听：
+SDK 提供 `SYS_EVENT_HANDLER` 宏注册系统事件监听：
 
 ```c
 #define SYS_EVENT_HANDLER(type, fn, pri) \
@@ -197,48 +245,38 @@ SDK 提供 `SYS_EVENT_HANDLER` 宏，可以在任意 .c 文件中注册系统事
 - `fn`: 回调函数
 - `pri`: 优先级（**数字越小越优先**）
 
-### 拦截流程
-
-```
-按键按下
-  ↓
-IO 驱动 → 原始值 134 → 映射为 KEY_MUSIC_PP
-  ↓
-sys_event_notify() 广播给所有 handler（按优先级排序）
-  ├─ 你的 handler (prio=3) → 先拿到事件 → 调 sys_key_event_consume()
-  └─ SDK handler (prio=4) → 发现事件已消耗 → 跳过
-```
-
-### 当前调试菜单
-
-| 按键 | 动作 | 功能 |
-|:----:|:----:|------|
-| **IO0 单击** | KEY_MUSIC_PP | 打印 LED 粒子状态 + 按键帮助 |
-| **IO0 长按** | KEY_CALL_HANG_UP | 切换场半径 30↔60 |
-| **IO0 双击** | KEY_CALL_LAST_NO | 所有粒子速度设为 5 |
-| **IO1 单击** | KEY_MUSIC_NEXT | 切换到下一个 LED 效果 |
-| **IO1 长按** | KEY_VOL_UP | 所有粒子速度 +1 |
-
-### 添加自定义按键处理
-
-在 `apps/src/key_handler/key_handler.c` 的 `my_key_handler()` 中加 case：
+当前 handler（仅打印日志，不消耗事件）：
 
 ```c
-case KEY_MUSIC_NEXT:
-    // 自己的逻辑（例如切换 LED 效果）
-    led_effect_switch(1);
-    break;
+static void my_key_handler(struct sys_event *event)
+{
+    u16 key = event->u.key.event;
+    u16 init = event->u.key.init;
+    u32 value = event->u.key.value;
+
+    printf("[KEY] event=%d(0x%x)  value=%d  init=%d\n", key, key, value, init);
+}
 ```
 
-### 注意事项
+输出示例：
+```
+[KEY] event=134(0x86)  value=0  init=1    ← IO0 单击
+[KEY] event=136(0x88)  value=0  init=1    ← IO1 单击
+[KEY] event=163(0xA3)  value=0  init=1    ← IO0 双击
+[KEY] event=164(0xA4)  value=0  init=1    ← IO0 长按
+```
 
-- `sys_key_event_consume(&event->u.key)` 调用后，SDK 模块（BT 播放/暂停等）**不会收到此按键事件**
-- 如果希望某个按键同时触发自定义操作和 SDK 默认行为，**不要调用** `sys_key_event_consume`
-- 该 API 在 `include_lib/system/event.h` 中声明：
+> ⚠️ 注意：所有按键事件 init 字段固定为 1（驱动在判定完手势后才发事件，不区分按下/释放）。如果需要区分，需在事件表的**抬起列**配一个独立事件值。
+
+### 事件消耗
+
+调用 `sys_key_event_consume()` 可阻止 SDK 其他模块处理该按键：
 
 ```c
-void sys_key_event_consume(struct key_event *e);
+sys_key_event_consume(&event->u.key);
 ```
+
+不调用则 SDK（BT 播放/暂停等）照常响应。
 
 ---
 

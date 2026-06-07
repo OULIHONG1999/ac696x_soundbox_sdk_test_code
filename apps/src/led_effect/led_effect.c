@@ -438,7 +438,6 @@ static void led_task(void *priv)
     effect_particles_init();
 
     u32 step = 0;
-    u32 effect_idx = 255;
 
     while (1) {
         // 每 3 帧 (≈100ms) 读一次频谱
@@ -446,53 +445,8 @@ static void led_task(void *priv)
             read_spectrum();
         }
 
-        // 按键手动切换效果
-        if (g_switch_req || effect_idx == 255) {
-            if (effect_idx == 255) {
-                effect_idx = 3;   // 默认启动粒子效果
-            } else if (g_switch_req == 1) {
-                effect_idx ++;
-                if (effect_idx >= EFFECT_NUM) {
-                    effect_idx = 0;
-                }
-            } else {
-                if (effect_idx == 0) {
-                    effect_idx = EFFECT_NUM - 1;
-                } else {
-                    effect_idx --;
-                }
-            }
-            g_switch_req = 0;
-
-            if (effect_idx == 3) {
-                effect_particles_init();
-            }
-
-            printf("\n[LED] >>> 切换到: %s\n", effect_names[effect_idx]);
-
-            // 切效果时全暗一帧，平滑过渡
-            for (int i = 0; i < LED_NUM; i++) {
-                tgt_r[i] = 0;
-                tgt_g[i] = 0;
-                tgt_b[i] = 0;
-            }
-        }
-
-        // 执行当前效果
-        switch (effect_idx) {
-        case 0:
-            effect_fire(step);
-            break;
-        case 1:
-            effect_breath(step);
-            break;
-        case 2:
-            effect_bounce(step);
-            break;
-        default:
-            effect_particles(step);
-            break;
-        }
+        // 默认粒子效果
+        effect_particles(step);
 
         smooth_leds();
         flush_leds();

@@ -7,27 +7,50 @@
 #ifdef CONFIG_BOARD_AC696X_DEMO
 /***********************************************************
  *				bt 模式的 iokey table
+ *
+ * KEY_IO_NUM_MAX = 物理 IO 按键数量
+ * KEY_EVENT_MAX  = 6 (每列代表一类操作)
+ *
+ * 每列的触发条件和行为:
+ *
+ *  列0（单击）  : 按下后短时间松开 → 发一次事件
+ *  列1（长按）  : 按住超过 long_time(ms) → 发一次事件
+ *  列2（hold）  : 长按判定后继续按住 → 循环发事件(用于音量连加)
+ *  列3（抬起）  : 松开按键 → 发一次事件(用于"按下开/松开关")
+ *  列4（双击）  : 快速按两次 → 发一次事件
+ *  列5（三击）  : 快速按三次 → 发一次事件
+ *
+ *  配 KEY_NULL = 不处理该操作
+ *
+ *  注意: 驱动在判定完手势后才发事件, init 固定为1,
+ *        不区分按下/释放。如需区分需用抬起列。
+ *
+ *  按键值定义见: apps/soundbox/include/key_event_deal.h
  ***********************************************************/
 #if TCFG_APP_BT_EN
 const u16 bt_key_io_table[KEY_IO_NUM_MAX][KEY_EVENT_MAX] = {
-    //单击             //长按          //hold         //抬起            //双击                //三击
+    //  列0:单击          列1:长按          列2:hold          列3:抬起       列4:双击           列5:三击
     [0] = {
-        KEY_MUSIC_PP,	KEY_CALL_HANG_UP,	KEY_NULL,	KEY_NULL,	KEY_CALL_LAST_NO,	KEY_NULL
+        KEY_MUSIC_PP,	  KEY_CALL_HANG_UP,	  KEY_NULL,	      KEY_NULL,	    KEY_CALL_LAST_NO,	KEY_NULL
     },
+    // IO0: 单击=播放暂停, 长按=挂断, 双击=重拨, hold/抬起/三击 无
     [1] = {
-        KEY_MUSIC_NEXT,	KEY_VOL_UP,			KEY_VOL_UP,	KEY_NULL,	KEY_NULL,			KEY_NULL
+        KEY_MUSIC_NEXT,	  KEY_VOL_UP,		  KEY_VOL_UP,	  KEY_NULL,	    KEY_NULL,			KEY_NULL
     },
+    // IO1: 单击=下一曲, 长按=音量+(hold持续发)
     [2] = {
-        KEY_MUSIC_NEXT,	KEY_VOL_UP,			KEY_VOL_UP,	KEY_NULL,	KEY_NULL,			KEY_NULL
+        KEY_MUSIC_NEXT,	  KEY_VOL_UP,		  KEY_VOL_UP,	  KEY_NULL,	    KEY_NULL,			KEY_NULL
     },
+    // IO2: 同 IO1
     [3] = {
-        KEY_CHANGE_MODE, KEY_NULL,			KEY_NULL,	KEY_NULL,	KEY_NULL,			KEY_NULL
+        KEY_CHANGE_MODE,  KEY_NULL,			  KEY_NULL,	  KEY_NULL,	    KEY_NULL,			KEY_NULL
     },
+    // IO3: 单击=切换模式, 其他无
     [4] = {
-        KEY_NULL,		KEY_NULL,			KEY_NULL,	KEY_NULL,	KEY_NULL,			KEY_NULL
+        KEY_NULL,		  KEY_NULL,			  KEY_NULL,	  KEY_NULL,	    KEY_NULL,			KEY_NULL
     },
     [5] = {
-        KEY_NULL,		KEY_NULL,			KEY_NULL,	KEY_NULL,	KEY_NULL,			KEY_NULL
+        KEY_NULL,		  KEY_NULL,			  KEY_NULL,	  KEY_NULL,	    KEY_NULL,			KEY_NULL
     },
 };
 #endif
