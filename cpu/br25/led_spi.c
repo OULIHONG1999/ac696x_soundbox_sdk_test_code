@@ -10,8 +10,8 @@ static const u8 SPI2_DO[2] = {
     IO_PORTB_07,//'A'
     IO_PORT_DM  //'B'
 };
-#define LED_SPI                 JL_SPI1
-#define LED_SPI_PORT            'B'
+#define LED_SPI                 JL_SPI2
+#define LED_SPI_PORT            'A'
 #define LED_SPI_DAT_BAUD        8000000
 #define LED_SPI_REST_BAUD       1000000
 #define LED_SPI_CLOCK_BASE		clk_get("lsb")
@@ -144,12 +144,12 @@ u8 led_spi_resume(void)
 
 static u8 spi_dat_buf[24 * 2] __attribute__((aligned(4)));
 extern void wdt_clear();
-void led_spi_test(void)
+
+static void led_spi_task(void *priv)
 {
     printf("******************  led spi test  *******************\n");
     led_spi_init();
     u8 cnt = 0;
-    u8 pulse = 0;
     while (1) {
         cnt ++;
         led_spi_rgb_to_24byte(cnt, 255 - cnt, 0, spi_dat_buf, 0);
@@ -162,4 +162,9 @@ void led_spi_test(void)
         os_time_dly(2);
         wdt_clear();
     }
+}
+
+void led_spi_test(void)
+{
+    os_task_create(led_spi_task, NULL, 20, 256, 0, "led_spi");
 }

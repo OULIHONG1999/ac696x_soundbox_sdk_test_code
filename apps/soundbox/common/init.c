@@ -87,7 +87,7 @@ static void check_power_on_key(void)
         }
     }
 }
-
+extern void gpio_cfg_init(void);
 static void app_init()
 {
     int update;
@@ -102,7 +102,7 @@ static void app_init()
     do_module_initcall();
     do_late_initcall();
 
-
+    gpio_cfg_init();
     audio_enc_init();
     audio_dec_init();
 

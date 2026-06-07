@@ -85,4 +85,3 @@ const struct task_info task_info_table[] = {
 #endif
     {0, 0},
 };
-

@@ -26,11 +26,11 @@
 //*********************************************************************************//
 #define TCFG_APP_BT_EN			            1
 #define TCFG_APP_MUSIC_EN			        1
-#define TCFG_APP_LINEIN_EN					1
-#define TCFG_APP_FM_EN					    1
+#define TCFG_APP_LINEIN_EN					0
+#define TCFG_APP_FM_EN					    0
 #define TCFG_APP_PC_EN					    0
 #define TCFG_APP_RTC_EN					    0
-#define TCFG_APP_RECORD_EN				    1
+#define TCFG_APP_RECORD_EN				    0
 #define TCFG_APP_SPDIF_EN                   0
 //*********************************************************************************//
 //                               PCM_DEBUG调试配置                                 //
@@ -235,17 +235,17 @@
 //*********************************************************************************//
 //                                 iokey 配置                                      //
 //*********************************************************************************//
-#define TCFG_IOKEY_ENABLE					DISABLE_THIS_MOUDLE //是否使能IO按键
+#define TCFG_IOKEY_ENABLE					1//DISABLE_THIS_MOUDLE //是否使能IO按键
 
 #define TCFG_IOKEY_POWER_CONNECT_WAY		ONE_PORT_TO_LOW    //按键一端接低电平一端接IO
 
-#define TCFG_IOKEY_POWER_ONE_PORT			IO_PORTB_01        //IO按键端口
+#define TCFG_IOKEY_POWER_ONE_PORT			IO_PORTA_01        //IO按键端口
 
 #define TCFG_IOKEY_PREV_CONNECT_WAY			ONE_PORT_TO_LOW  //按键一端接低电平一端接IO
 #define TCFG_IOKEY_PREV_ONE_PORT			IO_PORTB_00
 
 #define TCFG_IOKEY_NEXT_CONNECT_WAY 		ONE_PORT_TO_LOW  //按键一端接低电平一端接IO
-#define TCFG_IOKEY_NEXT_ONE_PORT			IO_PORTB_02
+#define TCFG_IOKEY_NEXT_ONE_PORT			IO_PORTA_03
 
 //*********************************************************************************//
 //                                 adkey 配置                                      //
@@ -396,7 +396,7 @@ DAC硬件上的连接方式,可选的配置：
     DAC_OUTPUT_LR                   立体声
     DAC_OUTPUT_MONO_LR_DIFF         单声道差分输出
 */
-#define TCFG_AUDIO_DAC_CONNECT_MODE    DAC_OUTPUT_LR
+#define TCFG_AUDIO_DAC_CONNECT_MODE    DAC_OUTPUT_MONO_LR_DIFF
 
 
 
@@ -1015,7 +1015,7 @@ DAC硬件上的连接方式,可选的配置：
 #define AUDIO_SURROUND_CONFIG     0//3d环绕
 
 #define AUDIO_VBASS_CONFIG        0//虚拟低音,虚拟低音不支持四声道
-#define AUDIO_SPECTRUM_CONFIG     0  //频响能量值获取接口
+#define AUDIO_SPECTRUM_CONFIG     1  //频响能量值获取接口
 #define AUDIO_MIDI_CTRL_CONFIG    0  //midi电子琴接口使能
 
 

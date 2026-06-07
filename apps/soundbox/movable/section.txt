@@ -19,30 +19,6 @@
 
 
 1:
-
-
-.gpio_ram
-.LED_code
-
-
-.usr_timer_code
-.timer_code
-.cbuf_code
-.fm_data_code
-.pcm_code
-.audio_dec_pcm_code
-.audio_track_code
-.stream_code_nor_run
-.mixer_code_nor_run
-.audio_codec_code
-.audio_codec_code_read_file
-.audio_src_code_nor_run
-.src_base_code_nor_run
-.audio_dac_code_nor_run
-.audio_cfifo_code_nor_run
-
-
-
 2:
 
 

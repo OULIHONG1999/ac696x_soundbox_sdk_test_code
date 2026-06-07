@@ -266,11 +266,11 @@ const struct iokey_port iokey_list[] = {
         .key_value = 0,                                       //按键值
     },
 
-    {
-        .connect_way = TCFG_IOKEY_PREV_CONNECT_WAY,
-        .key_type.one_io.port = TCFG_IOKEY_PREV_ONE_PORT,
-        .key_value = 1,
-    },
+    // {
+    //     .connect_way = TCFG_IOKEY_PREV_CONNECT_WAY,
+    //     .key_type.one_io.port = TCFG_IOKEY_PREV_ONE_PORT,
+    //     .key_value = 1,
+    // },
 
     {
         .connect_way = TCFG_IOKEY_NEXT_CONNECT_WAY,
@@ -887,11 +887,9 @@ static void board_devices_init(void)
 void uartSendInit();
 extern void alarm_init();
 extern void cfg_file_parse(u8 idx);
-extern void gpio_cfg_init(void);
 void board_init()
 {
     board_power_init();
-    gpio_cfg_init();
     adc_vbg_init();
     adc_init();
     cfg_file_parse(0);

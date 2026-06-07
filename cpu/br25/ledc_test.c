@@ -1,5 +1,5 @@
 
-#if 0
+#if 1
 
 #include "system/includes.h"
 #include "audio_spectrum.h"
@@ -431,13 +431,37 @@ void led_rgb_scan(void *priv)
     step_cnt ++;
 }
 
+static void led_task(void *priv)
+{
+    led_init();
+    u32 step_cnt = 0;
+    u32 mode_idx = 0;
+    struct led_rgb_t *led_rgb = led_rgb_table[0];
+    while (1) {
+        if ((step_cnt % 800) == 0) {
+            led_rgb = led_rgb_table[mode_idx];
+            mode_idx ++;
+            if (mode_idx >= (sizeof(led_rgb_table) / 4)) {
+                mode_idx = 0;
+            }
+        }
+        led_rgb_upgrade(led_rgb, step_cnt);
+        step_cnt ++;
+
+        //每10次(100ms)获取一次频谱能量值
+        if ((step_cnt % 10) == 0) {
+            led_get_spectrum(spec_hdl);
+        }
+
+        os_time_dly(1);  //10ms延时(1 tick ≈ 10ms)
+        wdt_clear();
+    }
+}
+
 void my_led_test(void)
 {
     printf("******************  led test  *******************\n");
-    led_init();
-    sys_timer_add(NULL, led_rgb_scan, 10);
-    sys_timer_add(spec_hdl, led_get_spectrum, 100);//定期获取能量值
+    os_task_create(led_task, NULL, 20, 512, 0, "led_test");
 }
 
 #endif
-

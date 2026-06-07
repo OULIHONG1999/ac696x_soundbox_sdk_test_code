@@ -316,6 +316,9 @@ static void a2dp_audio_res_close(void)
         bt_a2dp_dec->stream = NULL;
     }
     app_audio_state_exit(APP_AUDIO_STATE_MUSIC);
+
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -353,17 +356,12 @@ static void a2dp_dec_release()
 /*----------------------------------------------------------------------------*/
 static void a2dp_dec_event_handler(struct audio_decoder *decoder, int argc, int *argv)
 {
-    extern void pa_enable(void);
-    extern void pa_disable(void);
-
     switch (argv[0]) {
     case AUDIO_DEC_EVENT_START:
         log_i("AUDIO_DEC_EVENT_START\n");
-        pa_enable();
         break;
     case AUDIO_DEC_EVENT_END:
         log_i("AUDIO_DEC_EVENT_END\n");
-        pa_disable();
         a2dp_dec_close();
         break;
     }
@@ -721,6 +719,9 @@ static int a2dp_dec_start(void)
     }
 
     clock_set_cur();
+
+    extern void pa_enable(void);
+    pa_enable();
 
     return 0;
 
@@ -1677,5 +1678,4 @@ REGISTER_LP_TARGET(bt_dec_lp_target) = {
     .name = "bt_dec",
     .is_idle = bt_dec_idle_query,
 };
-
 

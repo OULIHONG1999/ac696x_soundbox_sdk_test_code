@@ -1,34 +1,25 @@
-#全局生效
-*.o
-*.orig
-*.depend
-*.layout
-*.bc
-
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# vscode配置文件
-.vscode/settings.json
-
-#客户发布文件
-release/
-
-#各系列忽略文件
-
-#696音箱
-
-#701音箱
-obj/
+# 编译产物
+cpu/br25/tools/*.bin
+cpu/br25/tools/*.fw
+cpu/br25/tools/*.ufw
+cpu/br25/tools/*.elf
+cpu/br25/tools/*.txt
+cpu/br25/tools/*.o
 objs/
+*.o
+
+# IDE
+*.cbp
+*.layout
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# AtomCode 配置
+.atomcode/
+
+# 系统
+Thumbs.db
+.DS_Store

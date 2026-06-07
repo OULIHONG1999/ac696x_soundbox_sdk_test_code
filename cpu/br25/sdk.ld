@@ -418,6 +418,14 @@ SECTIONS
         adapter_encoder_begin = .;
         KEEP(*(.adapter_encoder))
         adapter_encoder_end = .;
+
+
+      *(.usr_timer_const)
+     *(.timer_const)
+     *(.cbuf_const)
+  *(.fm_data_const)
+  . = ALIGN(4);
+
   *(.usr_timer_code)
   *(.timer_code)
   *(.cbuf_code)
@@ -434,10 +442,10 @@ SECTIONS
   . = ALIGN(4);
         *(.LED_code)
 
-
-
-
-
+  . = ALIGN(4);
+        *(.LED_const)
+  . = ALIGN(4);
+        *(.gpio_const_ram)
 
 
   . = ALIGN(4);
@@ -790,7 +798,7 @@ SECTIONS
   . = ALIGN(4);
         *(.pcm_code)
 
-
+        *(.pcm_const)
 
 
 
@@ -1091,7 +1099,7 @@ SECTIONS
   *(.audio_dec_file_const)
   *(.audio_dec_pcm_code)
 
-
+  *(.audio_dec_pcm_const)
 
   *(.audio_resample_code)
   *(.audio_resample_const)
@@ -1116,7 +1124,7 @@ SECTIONS
   *(.audio_cfifo_const)
   *(.audio_track_code)
 
-
+  *(.audio_track_const)
 
   *(.audio_adc_code)
   *(.audio_adc_const)
@@ -1925,13 +1933,6 @@ SECTIONS
         media_data_code_start = .;
         . = ALIGN(4);
   *(.sbc_eng_code)
-
-
-        *(.pcm_const)
-
-  *(.audio_dec_pcm_const)
-  *(.audio_track_const)
-
         . = ALIGN(4);
 
 
@@ -1942,27 +1943,6 @@ SECTIONS
         AudioEffects_data_code_end = .;
         AudioEffects_data_code_size = AudioEffects_data_code_end - AudioEffects_data_code_begin;
         media_data_code_end = .;
-
-
-
-      *(.usr_timer_const)
-     *(.timer_const)
-     *(.cbuf_const)
-  *(.fm_data_const)
-
-  . = ALIGN(4);
-        *(.LED_const)
-  . = ALIGN(4);
-        *(.gpio_const_ram)
-
-  . = ALIGN(4);
-
-
-
-
-
-
-
   . = ALIGN(4);
         __app_movable_slot_start = .;
         *(.movable.slot.1)
@@ -2169,11 +2149,11 @@ SECTIONS
    *(.fm_mem)
    *(.linein_pcm_mem)
 
-            . = ALIGN(4);
-            __fm_overlay_movable_saddr = .;
-            *(.fm_overlay_movable_code)
-            __fm_overlay_movable_eaddr = __fm_overlay_movable_saddr + (0x3330 + 0x100);
-            . = __fm_overlay_movable_eaddr;
+
+
+
+
+
 
   }
         .overlay_pc
