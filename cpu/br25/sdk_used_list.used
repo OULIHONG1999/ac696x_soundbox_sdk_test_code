@@ -55,6 +55,14 @@ mp3_decoder
 
 wma_decoder
 g729_decoder
+
+
+
+
+
+
+
+aac_decoder
 wav_decoder
 cvsd_encoder
 

@@ -557,7 +557,7 @@ DAC硬件上的连接方式,可选的配置：
 //*********************************************************************************//
 //                                  EQ配置                                         //
 //*********************************************************************************//
-#define TCFG_EQ_ENABLE                      	1     //支持EQ功能,EQ总使能
+#define TCFG_EQ_ENABLE                      	0     //支持EQ功能,EQ总使能
 #if TCFG_EQ_ENABLE
 #define TCFG_BT_MUSIC_EQ_ENABLE             	1     //支持蓝牙音乐EQ
 #define TCFG_PHONE_EQ_ENABLE                	1     //支持通话近端EQ
@@ -726,7 +726,7 @@ DAC硬件上的连接方式,可选的配置：
 //                                  系统配置                                         //
 //*********************************************************************************//
 #define TCFG_AUTO_SHUT_DOWN_TIME		    0   //没有蓝牙连接自动关机时间
-#define TCFG_SYS_LVD_EN						1   //电量检测使能
+#define TCFG_SYS_LVD_EN						0   //电量检测使能
 #define TCFG_POWER_ON_NEED_KEY				0	  //是否需要按按键开机配置
 #define TWFG_APP_POWERON_IGNORE_DEV         4000//上电忽略挂载设备，0时不忽略，非0则n毫秒忽略
 
@@ -746,7 +746,7 @@ DAC硬件上的连接方式,可选的配置：
 #define USER_SUPPORT_PROFILE_HFP    1
 #define USER_SUPPORT_PROFILE_A2DP   1
 #define USER_SUPPORT_PROFILE_AVCTP  1
-#define USER_SUPPORT_PROFILE_HID    1
+#define USER_SUPPORT_PROFILE_HID    0
 #define USER_SUPPORT_PROFILE_PNP    1
 #define USER_SUPPORT_PROFILE_PBAP   0
 

@@ -251,6 +251,14 @@ mp3_decoder
 
 wma_decoder
 g729_decoder
+
+
+
+
+
+
+
+aac_decoder
 wav_decoder
 cvsd_encoder
 
@@ -297,11 +305,19 @@ RAM_SIZE = RAM_END - RAM_BEGIN;
 MIC_EFFECT_EQ_SECTION = 3;
 
 
-EQ_SECTION_NUM = 20 +MIC_EFFECT_EQ_SECTION;
+
+
+EQ_SECTION_NUM = 10+MIC_EFFECT_EQ_SECTION;
+
+
+
+
+
+
 MEMORY
 {
 
- code0(rx) : ORIGIN = 0x1E00100, LENGTH = (1024 * 1024)
+ code0(rx) : ORIGIN = 0x1E00100, LENGTH = (512 * 1024)
 
 
 
@@ -2008,7 +2024,7 @@ SECTIONS
             acl_tx_pool = .;
             *(.bredr_tx_bulk)
 
-            acl_tx_pool_end = acl_tx_pool + (2 * 1024);
+            acl_tx_pool_end = acl_tx_pool + (3 * 1024);
 
 
 
