@@ -38,13 +38,13 @@ INCLUDES += -Iapps/src/新模块
 | `apps/src/pa/pa_drv.c` | PA 功放驱动（`PA_EN_ACTIVE_HIGH` 切换极性） |
 | `apps/src/led_effect/led_effect.c` | RGB LED 灯效 |
 | `apps/src/key_handler/key_handler.c` | 按键事件拦截（`SYS_EVENT_HANDLER` 优先级 3） |
-| `cpu/br25/audio_dec/audio_dec_bt.c` | PA 使能/关闭触发点 |
+| `cpu/br25/audio_dec/audio_dec_*.c` | PA 使能/关闭触发点（覆盖 BT/文件播放/FM/LINEIN/PC/SPDIF） |
 | `board_ac696x_demo/board_ac696x_demo_cfg.h` | 当前板型 TCFG_* 配置 |
 | `board_ac696x_demo/key_table/iokey_table.c` | 各模式 IO 按键事件表 |
 
 ## 硬件
 
-- **PA 使能脚**：IO_PORTA_00（高电平有效，`PA_EN_ACTIVE_HIGH` 宏切换）
+- **PA 使能脚**：IO_PORTA_02（高电平有效，`PA_EN_ACTIVE_HIGH` 宏切换）
 - **DAC 输出**：`DAC_OUTPUT_MONO_LR_DIFF`（单声道差分）
 - **串口日志**：IO_PORT_DP，波特率 1000000
 - **RGB LED**：8 个，SPI2 驱动（2MHz），Z字形排列（上排 0~3左→右，下排 4~7左→右）
@@ -53,7 +53,7 @@ INCLUDES += -Iapps/src/新模块
 ## 注意事项
 
 - `power_wakeup_init()` 后需调用 `debug_uart_init(NULL)` 重初始化串口
-- A2DP 流式解码中 `AUDIO_DEC_EVENT_START` **不触发**，PA 使能放在 `a2dp_dec_start()` 成功后
+- 所有解码器（BT/文件/FM/LINEIN/PC/SPDIF）中 `AUDIO_DEC_EVENT_START` **不触发**（流式解码），PA 使能放在各 `*_dec_start()` 函数的 `audio_decoder_start()` 成功后
 - 按键事件优先级：数字越小越优先，调用 `sys_key_event_consume()` 阻止 SDK 处理
 - 按键事件表 6 列：单击/长按/hold/抬起/双击/三击，各模式独立
 - 所有按键事件 `init=1`（驱动判定完手势才发事件），如需区分按下/释放用抬起列

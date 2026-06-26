@@ -490,6 +490,10 @@ int linein_dec_start()
         goto __err3;
     }
     clock_set_cur();
+
+    extern void pa_enable(void);
+    pa_enable();
+
     return 0;
 __err3:
     dec->start = 0;
@@ -773,6 +777,8 @@ void linein_dec_close(void)
     linein_dec_relaese();
     clock_set_cur();
     log_i("linein dec close \n\n ");
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/

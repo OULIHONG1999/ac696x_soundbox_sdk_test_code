@@ -780,6 +780,9 @@ __stream_set_end:
         goto __err3;
     }
 
+    extern void pa_enable(void);
+    pa_enable();
+
     sd_active_ctl_by_coding_type(1);
     return 0;
 
@@ -1154,6 +1157,8 @@ void file_dec_close(void)
     clock_set_cur();
     log_i("file_dec_close: exit\n");
     vddiom_set_dynamic(TCFG_LOWPOWER_VDDIOM_LEVEL);
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/

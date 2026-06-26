@@ -280,6 +280,8 @@ static int uac_audio_close(void)
 
 
     clock_set_cur();
+    extern void pa_disable(void);
+    pa_disable();
     return 0;
 }
 
@@ -639,6 +641,9 @@ static int uac_audio_start(void)
     if (err) {
         goto __err3;
     }
+
+    extern void pa_enable(void);
+    pa_enable();
 
     dec->state = 0;
     dec->cnt = 0;

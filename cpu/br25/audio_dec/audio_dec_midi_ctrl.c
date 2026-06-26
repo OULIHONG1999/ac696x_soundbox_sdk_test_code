@@ -55,6 +55,8 @@ void midi_ctrl_dec_relaese()
         midi_ctrl_dec_hdl = NULL;
         local_irq_enable();
     }
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -396,6 +398,10 @@ int midi_ctrl_dec_start()
     if (err) {
         goto __err3;
     }
+
+    extern void pa_enable(void);
+    pa_enable();
+
     return 0;
 __err3:
     audio_mixer_ch_close(&dec->mix_ch);

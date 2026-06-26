@@ -279,6 +279,8 @@ static void tone_dec_end_ctrl(struct tone_dec_handle *dec)
         tone_dec_list_play(dec, 0);
     }
     os_mutex_post(&dec->mutex);
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -311,6 +313,8 @@ static int tone_dec_file_app_evt_cb(void *priv, enum audio_dec_app_event event, 
         break;
     case AUDIO_DEC_APP_EVENT_START_INIT_OK:
         log_i("tone_file start init ok\n");
+        extern void pa_enable(void);
+        pa_enable();
         if (dec->cur_list->stream_handler) {
             // 删除原有的数据流，需要在回调中重新设置
             if (file_dec->dec->stream) {
@@ -439,6 +443,8 @@ static int tone_dec_sine_app_evt_cb(void *priv, enum audio_dec_app_event event, 
         break;
     case AUDIO_DEC_APP_EVENT_START_INIT_OK:
         log_i("tone_sine start init ok\n");
+        extern void pa_enable(void);
+        pa_enable();
         if (dec->cur_list->stream_handler) {
             // 删除原有的数据流，需要在回调中重新设置
             if (sine_dec->dec->stream) {

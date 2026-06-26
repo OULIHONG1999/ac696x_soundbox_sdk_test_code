@@ -697,6 +697,10 @@ int spdif_dec_start(void)
         return err;
     }
     clock_set_cur();
+
+    extern void pa_enable(void);
+    pa_enable();
+
     dec->status = SPDIF_STATE_START;
     return 0;
 }
@@ -912,6 +916,8 @@ void spdif_dec_close(void)
     spdif_dec_stop();
     spdif_dec_release();
     clock_set_cur();
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 bool spdif_dec_check(void)

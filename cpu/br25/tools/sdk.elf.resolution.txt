@@ -4135,6 +4135,7 @@ objs/cpu/br25/audio_dec/audio_dec_file.c.o
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,audio_stream_close,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,sd_active_status_control,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,clock_set_cur,l
+-r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,pa_disable,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,file_dec_get_file_decoder_hdl,pl
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,file_dec_get_status,pl
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,file_dec_restart,pl
@@ -4160,6 +4161,7 @@ objs/cpu/br25/audio_dec/audio_dec_file.c.o
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,audio_stream_open,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,audio_stream_add_list,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,fsave_fat_table,l
+-r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,pa_enable,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,sd_active_ctl_by_coding_type,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,fread,l
 -r=objs/cpu/br25/audio_dec/audio_dec_file.c.o,fseek,l
@@ -4231,12 +4233,14 @@ objs/cpu/br25/audio_dec/audio_dec_tone.c.o
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_decoder_task_add_wait,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_dec_app_set_frame_info,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_dec_sine_app_probe,l
+-r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,pa_enable,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_stream_del_entry,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_stream_close,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,clock_add_set,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_dec_sine_app_init_ok,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_output_channel_num,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,app_audio_output_samplerate_get,l
+-r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,pa_disable,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,strlen,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_dec_file_app_init_ok,l
 -r=objs/cpu/br25/audio_dec/audio_dec_tone.c.o,audio_dec_file_app_play_end,l

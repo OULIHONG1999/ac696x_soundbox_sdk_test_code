@@ -463,6 +463,10 @@ int fm_dec_start(void)
         goto __err3;
     }
     clock_set_cur();
+
+    extern void pa_enable(void);
+    pa_enable();
+
     return 0;
 __err3:
     dec->start = 0;
@@ -726,6 +730,8 @@ void fm_dec_close(void)
     fm_dec_relaese();
     clock_set_cur();
     log_i("fm dec close \n\n ");
+    extern void pa_disable(void);
+    pa_disable();
 }
 
 /*----------------------------------------------------------------------------*/

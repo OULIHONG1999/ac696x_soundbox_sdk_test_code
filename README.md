@@ -29,7 +29,7 @@ ac696x_soundbox_sdk-测试代码/
 ## 硬件信息
 
 - **芯片**: AC696x (杰理)
-- **PA使能脚**: IO_PORTA_00（高电平有效，可通过宏切换为低电平有效）
+- **PA使能脚**: IO_PORTA_02（高电平有效，可通过宏切换为低电平有效）
 - **DAC**: 芯片内部集成，模拟输出连接外部功放
   - 当前输出模式：**双声道差分**（`DAC_OUTPUT_DUAL_LR_DIFF`）
   - 信号：L+/L-、R+/R- 两对差分线
@@ -70,7 +70,7 @@ make clean
 `apps/src/gpio/gpio_cfg.h`:
 
 ```c
-#define PA_EN_PORT    IO_PORTA_00
+#define PA_EN_PORT    IO_PORTA_02
 ```
 
 ### 使能电平极性
@@ -84,14 +84,20 @@ make clean
 
 ### PA 触发逻辑
 
-PA 使能/关闭由 `cpu/br25/audio_dec/audio_dec_bt.c` 中的 A2DP 解码状态控制：
+PA 使能/关闭由各音频解码器的启动/关闭函数控制，覆盖**所有音频播放路径**：
 
-| 时机 | 调用 | 位置 |
-|------|------|------|
-| A2DP 解码器启动成功 | `pa_enable()` | `a2dp_dec_start()` → `audio_decoder_start()` 成功后 |
-| A2DP 解码器资源关闭 | `pa_disable()` | `a2dp_audio_res_close()` 末尾 |
+| 音频路径 | 使能位置 | 关闭位置 |
+|---------|---------|---------|
+| **A2DP 蓝牙** (audio_dec_bt.c) | `a2dp_dec_start()` → `audio_decoder_start()` 成功后 | `a2dp_audio_res_close()` 末尾 |
+| **文件播放** (audio_dec_file.c) | `file_dec_start()` → `audio_decoder_start()` 成功后 | `file_dec_close()` 末尾 |
+| **FM 收音** (audio_dec_fm.c) | `fm_dec_start()` → `audio_decoder_start()` 成功后 | `fm_dec_close()` 末尾 |
+| **LINE IN** (audio_dec_linein.c) | `linein_dec_start()` → `audio_decoder_start()` 成功后 | `linein_dec_close()` 末尾 |
+| **PC USB** (audio_dec_pc.c) | `uac_audio_start()` → `audio_decoder_start()` 成功后 | `uac_audio_close()` 末尾 |
+| **SPDIF** (audio_dec_spdif.c) | `spdif_dec_start()` → `audio_decoder_start()` 成功后 | `spdif_dec_close()` 末尾 |
+| **MIDI 控制** (audio_dec_midi_ctrl.c) | `midi_ctrl_dec_start()` → `audio_decoder_start()` 成功后 | `__midi_ctrl_dec_close()` 末尾 |
+| **提示音/正弦波** (audio_dec_tone.c) | `tone_dec_*_app_evt_cb` → `START_INIT_OK` | `tone_dec_end_ctrl()` 播放链结束 |
 
-> ⚠️ **注意**：`AUDIO_DEC_EVENT_START` 事件在 A2DP 流式解码中**不会触发**（此事件仅用于文件播放解码器），因此 `pa_enable()` 不能放在 decoder event handler 中。
+> ⚠️ **注意**：`AUDIO_DEC_EVENT_START` 事件在 A2DP 流式解码中**不会触发**，因此 PA 使能放在 `audio_decoder_start()` 成功后，而非 event handler 中。
 
 ---
 
@@ -270,16 +276,34 @@ SDK 提供 `SYS_EVENT_HANDLER` 宏注册系统事件监听：
 - `fn`: 回调函数
 - `pri`: 优先级（**数字越小越优先**）
 
-当前 handler（仅打印日志，不消耗事件）：
+当前 handler 包含完整的 switch/case 处理，可在此处添加灯效切换等自定义操作：
 
 ```c
 static void my_key_handler(struct sys_event *event)
 {
     u16 key = event->u.key.event;
-    u16 init = event->u.key.init;
-    u32 value = event->u.key.value;
 
-    printf("[KEY] event=%d(0x%x)  value=%d  init=%d\n", key, key, value, init);
+    switch (key) {
+    case KEY_MUSIC_PP:
+        // 单击/长按 → 播放暂停（或切换灯效）
+        led_effect_switch(1);          // 切到下一个灯效
+        break;
+    case KEY_MUSIC_NEXT:
+        // 下一曲
+        break;
+    case KEY_MUSIC_PREV:
+        // 上一曲
+        break;
+    case KEY_VOL_UP:
+        // 音量+（hold持续触发）
+        break;
+    case KEY_MUSIC_PLAYER_START:
+        // 按键抬起/释放
+        break;
+    case KEY_CHANGE_MODE:
+        // 切换工作模式
+        break;
+    }
 }
 ```
 
