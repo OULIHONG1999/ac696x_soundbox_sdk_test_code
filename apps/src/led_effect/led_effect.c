@@ -7,7 +7,7 @@ void led_spi_init(void);
 void led_spi_rgb_to_24byte(u8 r, u8 g, u8 b, u8 *buf, int idx);
 void led_spi_send_rgbbuf_isr(u8 *rgb_buf, u16 led_num);
 
-#define LED_NUM         4
+#define LED_NUM         8
 static u8 led_buf[24 * LED_NUM] __attribute__((aligned(4)));
 
 // ============ 频谱数据 ============
@@ -216,8 +216,8 @@ static void effect_bounce(u32 step)
 // ============ 效果④：能量粒子 ============
 #define LINE_MAX      255
 
-// 4个LED在线上的固定位置
-static const u8 led_pos[4] = {32, 96, 160, 224};
+// LED在线上的固定位置（0~255）
+static const u8 led_pos[LED_NUM] = {16, 48, 80, 112, 144, 176, 208, 240};
 
 // 3个粒子状态
 static int p_pos[3];
@@ -225,7 +225,7 @@ static int p_dir[3];
 static int p_speed_base[3];
 
 // 可调参数（运行时可通过 API 修改）
-int g_field_r = 30;             // 场半径(默认30，粒子能覆盖相邻LED)
+int g_field_r = 60;             // 场半径(默认60，粒子能覆盖相邻LED)
 static int g_particle_num = 3;   // 粒子数量
 
 // 粒子颜色 (R, G, B)

@@ -20,6 +20,9 @@ __pycache__/
 # AtomCode 配置
 .atomcode/
 
+# DevHome 配置
+.dev-home/
+
 # 系统
 Thumbs.db
 .DS_Store

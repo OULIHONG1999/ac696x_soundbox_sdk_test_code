@@ -10,8 +10,8 @@ static const u8 SPI2_DO[2] = {
     IO_PORTB_07,//'A'
     IO_PORT_DM  //'B'
 };
-#define LED_SPI                 JL_SPI2
-#define LED_SPI_PORT            'A'
+#define LED_SPI                 JL_SPI1
+#define LED_SPI_PORT            'B'
 #define LED_SPI_DAT_BAUD        8000000
 #define LED_SPI_REST_BAUD       1000000
 #define LED_SPI_CLOCK_BASE		clk_get("lsb")

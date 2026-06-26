@@ -10,7 +10,7 @@
 
 // PA功放使能脚
 // #define PA_EN_PORT              IO_PORTB_00
-#define PA_EN_PORT              IO_PORTA_00
+#define PA_EN_PORT              IO_PORTA_02
 
 // LED指示灯
 // #define LED_STATUS_PORT      IO_PORTA_00
