@@ -31,7 +31,7 @@
 const u16 bt_key_io_table[KEY_IO_NUM_MAX][KEY_EVENT_MAX] = {
     //  列0:单击          列1:长按          列2:hold          列3:抬起       列4:双击           列5:三击
     [0] = {
-        KEY_MUSIC_PP,	  KEY_CALL_HANG_UP,	  KEY_NULL,	      KEY_NULL,	    KEY_CALL_LAST_NO,	KEY_NULL
+        KEY_MUSIC_PP,	  KEY_MUSIC_PP,	  KEY_VOL_UP,	      KEY_MUSIC_PLAYER_START,	    KEY_MUSIC_NEXT,	KEY_MUSIC_PREV
     },
     // IO0: 单击=播放暂停, 长按=挂断, 双击=重拨, hold/抬起/三击 无
     [1] = {

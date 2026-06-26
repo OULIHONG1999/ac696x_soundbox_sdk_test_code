@@ -47,7 +47,7 @@ INCLUDES += -Iapps/src/新模块
 - **PA 使能脚**：IO_PORTA_00（高电平有效，`PA_EN_ACTIVE_HIGH` 宏切换）
 - **DAC 输出**：`DAC_OUTPUT_MONO_LR_DIFF`（单声道差分）
 - **串口日志**：IO_PORT_DP，波特率 1000000
-- **RGB LED**：4 个，SPI2 驱动（2MHz）
+- **RGB LED**：8 个，SPI2 驱动（2MHz），Z字形排列（上排 0~3左→右，下排 4~7左→右）
 - **IO 按键**：IO0=PA01(key_value=0)，IO1=PA03(key_value=2)
 
 ## 注意事项

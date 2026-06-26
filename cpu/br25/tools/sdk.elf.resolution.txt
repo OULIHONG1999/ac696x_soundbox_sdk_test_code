@@ -5516,6 +5516,8 @@ objs/apps/src/led_effect/led_effect.c.o
 objs/apps/src/key_handler/key_handler.c.o
 -r=objs/apps/src/key_handler/key_handler.c.o,key_handler_init,pl
 -r=objs/apps/src/key_handler/key_handler.c.o,printf,l
+-r=objs/apps/src/key_handler/key_handler.c.o,led_effect_switch,l
+-r=objs/apps/src/key_handler/key_handler.c.o,sys_key_event_consume,l
 -r=objs/apps/src/key_handler/key_handler.c.o,puts,l
 -r=objs/apps/src/key_handler/key_handler.c.o,__event_handler_my_key_handler,pl
 include_lib/liba/br25/cpu.a.llvm.18070.crc16.c

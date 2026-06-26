@@ -38,9 +38,9 @@ static u8 tgt_r[LED_NUM], tgt_g[LED_NUM], tgt_b[LED_NUM];
 static void smooth_leds(void)
 {
     for (int i = 0; i < LED_NUM; i++) {
-        cur_r[i] += ((int)tgt_r[i] - (int)cur_r[i]) >> 2;
-        cur_g[i] += ((int)tgt_g[i] - (int)cur_g[i]) >> 2;
-        cur_b[i] += ((int)tgt_b[i] - (int)cur_b[i]) >> 2;
+        cur_r[i] += ((int)tgt_r[i] - (int)cur_r[i]) >> 3;
+        cur_g[i] += ((int)tgt_g[i] - (int)cur_g[i]) >> 3;
+        cur_b[i] += ((int)tgt_b[i] - (int)cur_b[i]) >> 3;
     }
 }
 
@@ -85,12 +85,15 @@ static void effect_fire(u32 step)
         if (bri < 10)  bri = 10;
         if (bri > 255) bri = 255;
 
+        // Z字形物理映射：下排(4~7)=火焰根部红色，上排(0~3)=火焰尖端白色
+        int flame_pos = (i < 4) ? (7 - i) : (i - 4);
+
         u8 r = (u8)bri;
-        u8 g = (u8)((u32)bri * (30 + i * 55) / 255);
+        u8 g = (u8)((u32)bri * (30 + flame_pos * 55) / 255);
         if (g > r) {
             g = r;
         }
-        u8 b = (i >= 2) ? (u8)((u32)bri * (i - 1) * 25 / 255) : 0;
+        u8 b = (flame_pos >= 2) ? (u8)((u32)bri * (flame_pos - 1) * 25 / 255) : 0;
 
         tgt_r[i] = r;
         tgt_g[i] = g;
@@ -181,11 +184,12 @@ static void effect_bounce(u32 step)
     }
 
     int t = (int)(step % (period * 2));
+    int max_pos = (LED_NUM - 1) * 100;
     int pos100;
     if (t < period) {
-        pos100 = t * 300 / period;
+        pos100 = t * max_pos / period;
     } else {
-        pos100 = (period * 2 - t) * 300 / period;
+        pos100 = (period * 2 - t) * max_pos / period;
     }
 
     int ci = (int)(step / (period * 4)) % 7;
@@ -216,8 +220,9 @@ static void effect_bounce(u32 step)
 // ============ 效果④：能量粒子 ============
 #define LINE_MAX      255
 
-// LED在线上的固定位置（0~255）
-static const u8 led_pos[LED_NUM] = {16, 48, 80, 112, 144, 176, 208, 240};
+// LED在线上的固定位置（循环S形路径）
+// 路径: 0→1→2→3→7→6→5→4→0→... 对应物理Z字形从左到右然后下排右到左
+static const u8 led_pos[LED_NUM] = {0, 36, 73, 109, 255, 219, 182, 146};
 
 // 3个粒子状态
 static int p_pos[3];
@@ -225,7 +230,7 @@ static int p_dir[3];
 static int p_speed_base[3];
 
 // 可调参数（运行时可通过 API 修改）
-int g_field_r = 60;             // 场半径(默认60，粒子能覆盖相邻LED)
+int g_field_r = 100;            // 场半径(默认100，覆盖约3颗LED，制造流动感)
 static int g_particle_num = 3;   // 粒子数量
 
 // 粒子颜色 (R, G, B)
@@ -363,20 +368,18 @@ static void effect_particles(u32 step)
         p_intensity[i] += (ti - (int)p_intensity[i]) >> 3;
     }
 
-    // ---- 更新粒子位置 ----
+    // ---- 更新粒子位置（循环环绕，不反弹） ----
     for (int i = 0; i < 3; i++) {
         int speed = (int)((float)p_speed_base[i] * speed_factor);
         if (speed < 1) speed = 1;
 
         p_pos[i] += p_dir[i] * speed;
 
-        // 出界反弹
+        // 出界环绕（从255回到0或从0跳到255）
         if (p_pos[i] > LINE_MAX) {
-            p_pos[i] = LINE_MAX - (p_pos[i] - LINE_MAX);
-            p_dir[i] = -1;
+            p_pos[i] = 0;
         } else if (p_pos[i] < 0) {
-            p_pos[i] = -p_pos[i];
-            p_dir[i] = 1;
+            p_pos[i] = LINE_MAX;
         }
     }
 
@@ -415,6 +418,9 @@ static void effect_particles(u32 step)
 
 // ============ 手动切换 ============
 static volatile u8 g_switch_req = 0;
+static u8 g_current_effect = 3;          // 当前效果索引，默认粒子
+static u32 g_effect_step = 0;            // 当前效果内的步数
+#define AUTO_SWITCH_STEPS    1000        // ~30s (1000帧×30ms)
 
 void led_effect_switch(u8 direct)
 {
@@ -437,23 +443,60 @@ static void led_task(void *priv)
     led_spi_init();
     effect_particles_init();
 
-    u32 step = 0;
-
     while (1) {
         // 每 3 帧 (≈100ms) 读一次频谱
-        if ((step % 3) == 0) {
+        if ((g_effect_step % 3) == 0) {
             read_spectrum();
         }
 
-        // 默认粒子效果
-        effect_particles(step);
+        // 自动切换检测 (≈30s)
+        g_effect_step++;
+        if (g_effect_step >= AUTO_SWITCH_STEPS) {
+            g_effect_step = 0;
+            g_current_effect = (g_current_effect + 1) % EFFECT_NUM;
+            if (g_current_effect == 3) {
+                effect_particles_init();
+            }
+            printf("[LED] 自动切换到: %s\n", effect_names[g_current_effect]);
+        }
+
+        // 手动切换（优先级高于自动）
+        if (g_switch_req) {
+            u8 direct = g_switch_req;
+            g_switch_req = 0;
+            g_effect_step = 0;
+            if (direct == 1) {
+                g_current_effect = (g_current_effect + 1) % EFFECT_NUM;
+            } else {
+                g_current_effect = (g_current_effect + EFFECT_NUM - 1) % EFFECT_NUM;
+            }
+            if (g_current_effect == 3) {
+                effect_particles_init();
+            }
+            printf("[LED] 手动切换到: %s\n", effect_names[g_current_effect]);
+        }
+
+        // 运行当前效果
+        switch (g_current_effect) {
+        case 0:
+            effect_fire(g_effect_step);
+            break;
+        case 1:
+            effect_breath(g_effect_step);
+            break;
+        case 2:
+            effect_bounce(g_effect_step);
+            break;
+        case 3:
+            effect_particles(g_effect_step);
+            break;
+        }
 
         smooth_leds();
         flush_leds();
 
         os_time_dly(3);   // ≈30ms
         wdt_clear();
-        step ++;
     }
 }
 

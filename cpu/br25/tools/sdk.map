@@ -3179,7 +3179,7 @@ END GROUP
                 0x00000017                EQ_SECTION_NUM = (0x14 + MIC_EFFECT_EQ_SECTION)
                 0x01e00100                . = ORIGIN (code0)
 
-.text           0x01e00100    0x652e8
+.text           0x01e00100    0x657dc
                 0x01e00100                PROVIDE (flash_code_begin, .)
  *(.startup.text)
  .startup.text  0x01e00100       0x7e include_lib/liba/br25/cpu.a(startup.S.o)
@@ -3411,7 +3411,7 @@ END GROUP
                 0x01e01918      0x8a8 cpu/br25/tools/sdk.elf.o
  *(.bt_stack_code)
  .bt_stack_code
-                0x01e021c0     0xae7c cpu/br25/tools/sdk.elf.o
+                0x01e021c0     0xae7e cpu/br25/tools/sdk.elf.o
  *(.ble_db_const)
  *(.ble_db_code)
  *(.ble_sm_const)
@@ -3420,331 +3420,332 @@ END GROUP
  *(.ble_att_code)
  *(.ble_gatt_const)
  *(.ble_gatt_code)
-                0x01e0d03c                BTSTACK_LE_HOST_MESH_CODE_START = .
+                0x01e0d03e                BTSTACK_LE_HOST_MESH_CODE_START = .
  *(.ble_mesh_code)
  *(.ble_mesh_tinycrypt_code)
  *(.ble_mesh_const)
  *(.ble_mesh_tinycrypt_const)
                 0x00000000                BTSTACK_LE_HOST_MESH_CODE_SIZE = ABSOLUTE ((. - BTSTACK_LE_HOST_MESH_CODE_START))
-                0x01e0d03c                btstack_code_end = .
-                0x01e0d03c                . = ALIGN (0x4)
-                0x0000b890                BTSTACK_CODE_TOTAL_SIZE = (btstack_code_end - btstack_code_start)
-                0x01e0d03c                . = ALIGN (0x4)
-                0x01e0d03c                . = ALIGN (0x4)
-                0x01e0d03c                system_text_start = .
-                0x01e0d03c                _device_node_begin = .
-                0x01e0d03c                PROVIDE (device_node_begin, .)
+                0x01e0d03e                btstack_code_end = .
+                0x01e0d040                . = ALIGN (0x4)
+ *fill*         0x01e0d03e        0x2 
+                0x0000b892                BTSTACK_CODE_TOTAL_SIZE = (btstack_code_end - btstack_code_start)
+                0x01e0d040                . = ALIGN (0x4)
+                0x01e0d040                . = ALIGN (0x4)
+                0x01e0d040                system_text_start = .
+                0x01e0d040                _device_node_begin = .
+                0x01e0d040                PROVIDE (device_node_begin, .)
  *(.device)
- .device        0x01e0d03c        0x0 cpu/br25/tools/sdk.elf.o
-                0x01e0d03c                device_table
-                0x01e0d03c                _device_node_end = .
-                0x01e0d03c                PROVIDE (device_node_end, .)
-                0x01e0d03c                config_target_begin = .
+ .device        0x01e0d040        0x0 cpu/br25/tools/sdk.elf.o
+                0x01e0d040                device_table
+                0x01e0d040                _device_node_end = .
+                0x01e0d040                PROVIDE (device_node_end, .)
+                0x01e0d040                config_target_begin = .
                 [!provide]                PROVIDE (config_target_begin, .)
  *(.config_target)
-                0x01e0d03c                config_target_end = .
+                0x01e0d040                config_target_end = .
                 [!provide]                PROVIDE (config_target_end, .)
-                0x01e0d03c                system_code_begin = .
+                0x01e0d040                system_code_begin = .
  *(.system.*.text)
  .system.fs.text
-                0x01e0d03c     0x6a0c cpu/br25/tools/sdk.elf.o
+                0x01e0d040     0x6a12 cpu/br25/tools/sdk.elf.o
  .system.device.text
-                0x01e13a48       0xdc cpu/br25/tools/sdk.elf.o
+                0x01e13a52       0xdc cpu/br25/tools/sdk.elf.o
  .system.cpu.text
-                0x01e13b24      0xeac cpu/br25/tools/sdk.elf.o
-                0x01e13fa8                hw_mmu_disable
-                0x01e13fe0                vFillingTaskStack
-                0x01e14012                maskrom_init
+                0x01e13b2e      0xeca cpu/br25/tools/sdk.elf.o
+                0x01e13fd0                hw_mmu_disable
+                0x01e14008                vFillingTaskStack
+                0x01e1403a                maskrom_init
  .system.printf.text
-                0x01e149d0      0x4ba cpu/br25/tools/sdk.elf.o
+                0x01e149f8      0x4ba cpu/br25/tools/sdk.elf.o
  .system.lbuf.text
-                0x01e14e8a      0x5a0 cpu/br25/tools/sdk.elf.o
+                0x01e14eb2      0x5a0 cpu/br25/tools/sdk.elf.o
  .system.cbuf.text
-                0x01e1542a        0xe cpu/br25/tools/sdk.elf.o
+                0x01e15452        0xe cpu/br25/tools/sdk.elf.o
  .system.event.text
-                0x01e15438      0x374 cpu/br25/tools/sdk.elf.o
+                0x01e15460      0x388 cpu/br25/tools/sdk.elf.o
  .system.timer.text
-                0x01e157ac      0x348 cpu/br25/tools/sdk.elf.o
+                0x01e157e8      0x348 cpu/br25/tools/sdk.elf.o
  .system.cfg_tool.text
-                0x01e15af4      0x6dc cpu/br25/tools/sdk.elf.o
+                0x01e15b30      0x6dc cpu/br25/tools/sdk.elf.o
  .system.task.text
-                0x01e161d0       0x5a cpu/br25/tools/sdk.elf.o
+                0x01e1620c       0x5a cpu/br25/tools/sdk.elf.o
  .system.ascii.text
-                0x01e1622a      0x10a cpu/br25/tools/sdk.elf.o
+                0x01e16266      0x10a cpu/br25/tools/sdk.elf.o
  .system.app_core.text
-                0x01e16334      0x152 cpu/br25/tools/sdk.elf.o
+                0x01e16370      0x152 cpu/br25/tools/sdk.elf.o
  .system.init.text
-                0x01e16486       0x2a cpu/br25/tools/sdk.elf.o
-                0x01e16486                boot_info_init
-                0x01e164b0                system_code_end = .
-                0x01e164b0                . = ALIGN (0x4)
-                0x00009474                system_code_size = (system_code_end - system_code_begin)
-                0x01e164b0                vfs_ops_begin = .
+                0x01e164c2       0x2a cpu/br25/tools/sdk.elf.o
+                0x01e164c2                boot_info_init
+                0x01e164ec                system_code_end = .
+                0x01e164ec                . = ALIGN (0x4)
+                0x000094ac                system_code_size = (system_code_end - system_code_begin)
+                0x01e164ec                vfs_ops_begin = .
  *(.vfs_operations)
  .vfs_operations
-                0x01e164b0       0xe8 cpu/br25/tools/sdk.elf.o
-                0x01e164b0                sdfile_vfs_ops
-                0x01e16524                fat_vfs_ops
-                0x01e16598                vfs_ops_end = .
-                0x01e16598                _lib_version_begin = .
+                0x01e164ec       0xe8 cpu/br25/tools/sdk.elf.o
+                0x01e164ec                sdfile_vfs_ops
+                0x01e16560                fat_vfs_ops
+                0x01e165d4                vfs_ops_end = .
+                0x01e165d4                _lib_version_begin = .
                 [!provide]                PROVIDE (lib_version_begin, .)
  *(.lib_version)
- .lib_version   0x01e16598        0xc cpu/br25/tools/sdk.elf.o
-                0x01e16598                __version_sdfile
-                0x01e1659c                __version_fs
-                0x01e165a0                __version_fatfs
-                0x01e165a4                _lib_version_end = .
+ .lib_version   0x01e165d4        0xc cpu/br25/tools/sdk.elf.o
+                0x01e165d4                __version_sdfile
+                0x01e165d8                __version_fs
+                0x01e165dc                __version_fatfs
+                0x01e165e0                _lib_version_end = .
                 [!provide]                PROVIDE (lib_version_end, .)
-                0x01e165a4                _initcall_begin = .
-                0x01e165a4                PROVIDE (initcall_begin, .)
+                0x01e165e0                _initcall_begin = .
+                0x01e165e0                PROVIDE (initcall_begin, .)
  *(.initcall)
- .initcall      0x01e165a4       0x14 cpu/br25/tools/sdk.elf.o
-                0x01e165a4                __initcall_app_update_init
-                0x01e165a8                __initcall_eff_init
-                0x01e165ac                __initcall_eq_init
-                0x01e165b0                __initcall_audio_drc_lib_init
-                0x01e165b4                __initcall_audio_eq_lib_init
-                0x01e165b8                _initcall_end = .
-                0x01e165b8                PROVIDE (initcall_end, .)
-                0x01e165b8                _early_initcall_begin = .
-                0x01e165b8                PROVIDE (early_initcall_begin, .)
+ .initcall      0x01e165e0       0x14 cpu/br25/tools/sdk.elf.o
+                0x01e165e0                __initcall_app_update_init
+                0x01e165e4                __initcall_eff_init
+                0x01e165e8                __initcall_eq_init
+                0x01e165ec                __initcall_audio_drc_lib_init
+                0x01e165f0                __initcall_audio_eq_lib_init
+                0x01e165f4                _initcall_end = .
+                0x01e165f4                PROVIDE (initcall_end, .)
+                0x01e165f4                _early_initcall_begin = .
+                0x01e165f4                PROVIDE (early_initcall_begin, .)
  *(.early.initcall)
  .early.initcall
-                0x01e165b8        0xc cpu/br25/tools/sdk.elf.o
-                0x01e165b8                __initcall_board_power_wakeup_init
-                0x01e165bc                __initcall_sys_event_init
-                0x01e165c0                __initcall_sdfile_init
-                0x01e165c4                _early_initcall_end = .
-                0x01e165c4                PROVIDE (early_initcall_end, .)
-                0x01e165c4                _late_initcall_begin = .
-                0x01e165c4                PROVIDE (late_initcall_begin, .)
+                0x01e165f4        0xc cpu/br25/tools/sdk.elf.o
+                0x01e165f4                __initcall_board_power_wakeup_init
+                0x01e165f8                __initcall_sys_event_init
+                0x01e165fc                __initcall_sdfile_init
+                0x01e16600                _early_initcall_end = .
+                0x01e16600                PROVIDE (early_initcall_end, .)
+                0x01e16600                _late_initcall_begin = .
+                0x01e16600                PROVIDE (late_initcall_begin, .)
  *(.late.initcall)
  .late.initcall
-                0x01e165c4        0x4 cpu/br25/tools/sdk.elf.o
-                0x01e165c4                __initcall_sdk_meky_check
-                0x01e165c8                _late_initcall_end = .
-                0x01e165c8                PROVIDE (late_initcall_end, .)
-                0x01e165c8                _platform_initcall_begin = .
-                0x01e165c8                PROVIDE (platform_initcall_begin, .)
+                0x01e16600        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e16600                __initcall_sdk_meky_check
+                0x01e16604                _late_initcall_end = .
+                0x01e16604                PROVIDE (late_initcall_end, .)
+                0x01e16604                _platform_initcall_begin = .
+                0x01e16604                PROVIDE (platform_initcall_begin, .)
  *(.platform.initcall)
  .platform.initcall
-                0x01e165c8        0x4 cpu/br25/tools/sdk.elf.o
-                0x01e165c8                __initcall_syscfg_tools_init
-                0x01e165cc                _platform_initcall_end = .
-                0x01e165cc                PROVIDE (platform_initcall_end, .)
-                0x01e165cc                _module_initcall_begin = .
-                0x01e165cc                PROVIDE (module_initcall_begin, .)
+                0x01e16604        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e16604                __initcall_syscfg_tools_init
+                0x01e16608                _platform_initcall_end = .
+                0x01e16608                PROVIDE (platform_initcall_end, .)
+                0x01e16608                _module_initcall_begin = .
+                0x01e16608                PROVIDE (module_initcall_begin, .)
  *(.module.initcall)
-                0x01e165cc                _module_initcall_end = .
-                0x01e165cc                PROVIDE (module_initcall_end, .)
-                0x01e165cc                _sys_event_handler_begin = .
-                0x01e165cc                PROVIDE (sys_event_handler_begin, .)
+                0x01e16608                _module_initcall_end = .
+                0x01e16608                PROVIDE (module_initcall_end, .)
+                0x01e16608                _sys_event_handler_begin = .
+                0x01e16608                PROVIDE (sys_event_handler_begin, .)
  *(.sys_event.4.handler)
  .sys_event.4.handler
-                0x01e165cc        0x8 cpu/br25/tools/sdk.elf.o
-                0x01e165cc                __event_handler_tws_key_event_handler
+                0x01e16608        0x8 cpu/br25/tools/sdk.elf.o
+                0x01e16608                __event_handler_tws_key_event_handler
  *(.sys_event.3.handler)
  .sys_event.3.handler
-                0x01e165d4       0x10 cpu/br25/tools/sdk.elf.o
-                0x01e165d4                __event_handler_app_key_event_remap
-                0x01e165dc                __event_handler_my_key_handler
+                0x01e16610       0x10 cpu/br25/tools/sdk.elf.o
+                0x01e16610                __event_handler_app_key_event_remap
+                0x01e16618                __event_handler_my_key_handler
  *(.sys_event.2.handler)
  *(.sys_event.1.handler)
  *(.sys_event.0.handler)
  .sys_event.0.handler
-                0x01e165e4        0x8 cpu/br25/tools/sdk.elf.o
-                0x01e165e4                __event_handler_app_sys_event_probe_handler
-                0x01e165ec                _sys_event_handler_end = .
-                0x01e165ec                PROVIDE (sys_event_handler_end, .)
-                0x01e165ec                _syscfg_arg_begin = .
+                0x01e16620        0x8 cpu/br25/tools/sdk.elf.o
+                0x01e16620                __event_handler_app_sys_event_probe_handler
+                0x01e16628                _sys_event_handler_end = .
+                0x01e16628                PROVIDE (sys_event_handler_end, .)
+                0x01e16628                _syscfg_arg_begin = .
                 [!provide]                PROVIDE (syscfg_arg_begin, .)
  *(.syscfg.arg)
-                0x01e165ec                _syscfg_arg_end = .
+                0x01e16628                _syscfg_arg_end = .
                 [!provide]                PROVIDE (syscfg_arg_end, .)
-                0x01e165ec                _syscfg_handler_begin = .
+                0x01e16628                _syscfg_handler_begin = .
                 [!provide]                PROVIDE (syscfg_handler_begin, .)
  *(.syscfg.handler)
-                0x01e165ec                _syscfg_handler_end = .
+                0x01e16628                _syscfg_handler_end = .
                 [!provide]                PROVIDE (syscfg_handler_end, .)
-                0x01e165ec                _syscfg_ops_begin = .
-                0x01e165ec                PROVIDE (syscfg_ops_begin, .)
+                0x01e16628                _syscfg_ops_begin = .
+                0x01e16628                PROVIDE (syscfg_ops_begin, .)
  *(.syscfg.2.ops)
- .syscfg.2.ops  0x01e165ec       0x1c cpu/br25/tools/sdk.elf.o
-                0x01e165ec                cfg_btif
+ .syscfg.2.ops  0x01e16628       0x1c cpu/br25/tools/sdk.elf.o
+                0x01e16628                cfg_btif
  *(.syscfg.1.ops)
- .syscfg.1.ops  0x01e16608       0x1c cpu/br25/tools/sdk.elf.o
-                0x01e16608                cfg_vm
+ .syscfg.1.ops  0x01e16644       0x1c cpu/br25/tools/sdk.elf.o
+                0x01e16644                cfg_vm
  *(.syscfg.0.ops)
- .syscfg.0.ops  0x01e16624       0x1c cpu/br25/tools/sdk.elf.o
-                0x01e16624                cfg_bin
-                0x01e16640                _syscfg_ops_end = .
-                0x01e16640                PROVIDE (syscfg_ops_end, .)
-                0x01e16640                _server_info_begin = .
+ .syscfg.0.ops  0x01e16660       0x1c cpu/br25/tools/sdk.elf.o
+                0x01e16660                cfg_bin
+                0x01e1667c                _syscfg_ops_end = .
+                0x01e1667c                PROVIDE (syscfg_ops_end, .)
+                0x01e1667c                _server_info_begin = .
                 [!provide]                PROVIDE (server_info_begin, .)
  *(.server_info)
-                0x01e16640                _server_info_end = .
+                0x01e1667c                _server_info_end = .
                 [!provide]                PROVIDE (server_info_end, .)
-                0x01e16640                _bus_device_begin = .
+                0x01e1667c                _bus_device_begin = .
                 [!provide]                PROVIDE (bus_device_begin, .)
  *(.bus_device)
-                0x01e16640                _bus_device_end = .
+                0x01e1667c                _bus_device_end = .
                 [!provide]                PROVIDE (bus_device_end, .)
-                0x01e16640                _sys_power_hal_ops_begin = .
+                0x01e1667c                _sys_power_hal_ops_begin = .
                 [!provide]                PROVIDE (sys_power_hal_ops_begin, .)
  *(.sys_power_hal_ops)
-                0x01e16640                _sys_power_hal_ops_end = .
+                0x01e1667c                _sys_power_hal_ops_end = .
                 [!provide]                PROVIDE (sys_power_hal_ops_end, .)
-                0x01e16640                . = ALIGN (0x4)
-                0x01e16640                lp_target_begin = .
+                0x01e1667c                . = ALIGN (0x4)
+                0x01e1667c                lp_target_begin = .
                 [!provide]                PROVIDE (lp_target_begin, .)
  *(.lp_target)
- .lp_target     0x01e16640       0x78 cpu/br25/tools/sdk.elf.o
-                0x01e16640                key_lp_target
-                0x01e16648                hid_user_target
-                0x01e16650                ota_lp_target
-                0x01e16658                phone_incom_lp_target
-                0x01e16660                music_lp_target
-                0x01e16668                audio_dec_init_lp_target
-                0x01e16670                bt_dec_lp_target
-                0x01e16678                tone_dec_lp_target
-                0x01e16680                audio_cvp_lp_target
-                0x01e16688                linein_demo_lp_target
-                0x01e16690                mic_demo_lp_target
-                0x01e16698                __wakeup_is_idle_target
-                0x01e166a0                usb_dev_lp_target
-                0x01e166a8                usr_systimer_lp_target
-                0x01e166b0                btstack_lowpower_target
-                0x01e166b8                lp_target_end = .
+ .lp_target     0x01e1667c       0x78 cpu/br25/tools/sdk.elf.o
+                0x01e1667c                key_lp_target
+                0x01e16684                hid_user_target
+                0x01e1668c                ota_lp_target
+                0x01e16694                phone_incom_lp_target
+                0x01e1669c                music_lp_target
+                0x01e166a4                audio_dec_init_lp_target
+                0x01e166ac                bt_dec_lp_target
+                0x01e166b4                tone_dec_lp_target
+                0x01e166bc                audio_cvp_lp_target
+                0x01e166c4                linein_demo_lp_target
+                0x01e166cc                mic_demo_lp_target
+                0x01e166d4                __wakeup_is_idle_target
+                0x01e166dc                usb_dev_lp_target
+                0x01e166e4                usr_systimer_lp_target
+                0x01e166ec                btstack_lowpower_target
+                0x01e166f4                lp_target_end = .
                 [!provide]                PROVIDE (lp_target_end, .)
-                0x01e166b8                . = ALIGN (0x4)
-                0x01e166b8                deepsleep_target_begin = .
+                0x01e166f4                . = ALIGN (0x4)
+                0x01e166f4                deepsleep_target_begin = .
                 [!provide]                PROVIDE (deepsleep_target_begin, .)
  *(.deepsleep_target)
-                0x01e166b8                deepsleep_target_end = .
+                0x01e166f4                deepsleep_target_end = .
                 [!provide]                PROVIDE (deepsleep_target_end, .)
-                0x01e166b8                crypto_begin = .
+                0x01e166f4                crypto_begin = .
  *(.crypto_ecdh_code)
  *(.crypto_ecdh_const)
  *(.crypto_bigint_code)
  .crypto_bigint_code
-                0x01e166b8      0x5ea cpu/br25/tools/sdk.elf.o
+                0x01e166f4      0x5ea cpu/br25/tools/sdk.elf.o
  *(.crypto_bigint_const)
  *(.crypto_code)
- .crypto_code   0x01e16ca2      0x594 cpu/br25/tools/sdk.elf.o
+ .crypto_code   0x01e16cde      0x594 cpu/br25/tools/sdk.elf.o
  *(.crypto_const)
- *fill*         0x01e17236        0x2 
- .crypto_const  0x01e17238      0x171 cpu/br25/tools/sdk.elf.o
+ *fill*         0x01e17272        0x2 
+ .crypto_const  0x01e17274      0x171 cpu/br25/tools/sdk.elf.o
  *(.ECDH_sample_code)
  *(.ECDH_sample_const)
  *(.uECC_code)
- *fill*         0x01e173a9        0x1 
- .uECC_code     0x01e173aa     0x1f1e cpu/br25/tools/sdk.elf.o
+ *fill*         0x01e173e5        0x1 
+ .uECC_code     0x01e173e6     0x1f1e cpu/br25/tools/sdk.elf.o
  *(.uECC_const)
- .uECC_const    0x01e192c8       0xb0 cpu/br25/tools/sdk.elf.o
+ .uECC_const    0x01e19304       0xb0 cpu/br25/tools/sdk.elf.o
  *(.hmac_code)
- .hmac_code     0x01e19378      0x32c cpu/br25/tools/sdk.elf.o
+ .hmac_code     0x01e193b4      0x32c cpu/br25/tools/sdk.elf.o
  *(.hmac_const)
  *(.hash_sample_code)
  *(.hash_sample_const)
  *(.aes_cmac_sample_code)
  *(.aes_cmac_sample_const)
-                0x01e196a4                crypto_end = .
+                0x01e196e0                crypto_end = .
                 0x00002fec                crypto_size = (. - crypto_begin)
  *(.mem_code)
  *(.mem_const)
  *(.os_port_code)
  *(.os_port_const)
-                0x01e196a4                __movable_function_start = .
+                0x01e196e0                __movable_function_start = .
  *(movable.text.*)
  *(movable.stub.*)
  *(movable.region.*)
-                0x01e196a4                __movable_function_end = .
+                0x01e196e0                __movable_function_end = .
                 0x00000000                __movable_function_size = (__movable_function_end - __movable_function_start)
-                0x01e196a4                system_text_end = .
-                0x0000c668                system_code_total_size = (system_text_end - system_text_start)
-                0x01e196a4                . = ALIGN (0x4)
-                0x01e196a4                update_target_begin = .
+                0x01e196e0                system_text_end = .
+                0x0000c6a0                system_code_total_size = (system_text_end - system_text_start)
+                0x01e196e0                . = ALIGN (0x4)
+                0x01e196e0                update_target_begin = .
                 [!provide]                PROVIDE (update_target_begin, .)
  *(.update_target)
  .update_target
-                0x01e196a4       0x28 cpu/br25/tools/sdk.elf.o
-                0x01e196a4                audio_update_target
-                0x01e196ac                iic_update_target
-                0x01e196b4                spi_update_target
-                0x01e196bc                bredr_update_target
-                0x01e196c4                ble_update_target
-                0x01e196cc                update_target_end = .
+                0x01e196e0       0x28 cpu/br25/tools/sdk.elf.o
+                0x01e196e0                audio_update_target
+                0x01e196e8                iic_update_target
+                0x01e196f0                spi_update_target
+                0x01e196f8                bredr_update_target
+                0x01e19700                ble_update_target
+                0x01e19708                update_target_end = .
                 [!provide]                PROVIDE (update_target_end, .)
-                0x01e196cc                . = ALIGN (0x4)
-                0x01e196cc                . = ALIGN (0x4)
+                0x01e19708                . = ALIGN (0x4)
+                0x01e19708                . = ALIGN (0x4)
  *(.ui_ram)
-                0x01e196cc                . = ALIGN (0x4)
-                0x01e196cc                lcd_interface_begin = .
+                0x01e19708                . = ALIGN (0x4)
+                0x01e19708                lcd_interface_begin = .
  *(.lcd_if_info)
-                0x01e196cc                lcd_interface_end = .
-                0x01e196cc                ui_style_begin = .
+                0x01e19708                lcd_interface_end = .
+                0x01e19708                ui_style_begin = .
  *(.ui_style)
-                0x01e196cc                ui_style_end = .
-                0x01e196cc                elm_event_handler_begin_JL = .
+                0x01e19708                ui_style_end = .
+                0x01e19708                elm_event_handler_begin_JL = .
  *(.elm_event_handler_JL)
-                0x01e196cc                elm_event_handler_end_JL = .
-                0x01e196cc                elm_event_handler_begin_UPGRADE = .
+                0x01e19708                elm_event_handler_end_JL = .
+                0x01e19708                elm_event_handler_begin_UPGRADE = .
  *(.elm_event_handler_UPGRADE)
-                0x01e196cc                elm_event_handler_end_UPGRADE = .
-                0x01e196cc                elm_event_handler_begin_DIAL = .
+                0x01e19708                elm_event_handler_end_UPGRADE = .
+                0x01e19708                elm_event_handler_begin_DIAL = .
  *(.elm_event_handler_DIAL)
-                0x01e196cc                elm_event_handler_end_DIAL = .
-                0x01e196cc                control_event_handler_begin = .
+                0x01e19708                elm_event_handler_end_DIAL = .
+                0x01e19708                control_event_handler_begin = .
  *(.control_event_handler)
-                0x01e196cc                control_event_handler_end = .
-                0x01e196cc                control_ops_begin = .
+                0x01e19708                control_event_handler_end = .
+                0x01e19708                control_ops_begin = .
  *(.control_ops)
-                0x01e196cc                control_ops_end = .
-                0x01e196cc                battery_notify_begin = .
+                0x01e19708                control_ops_end = .
+                0x01e19708                battery_notify_begin = .
  *(.battery_notify)
-                0x01e196cc                battery_notify_end = .
-                0x01e196cc                . = ALIGN (0x4)
-                0x01e196cc                media_text_start = .
-                0x01e196cc                . = ALIGN (0x4)
+                0x01e19708                battery_notify_end = .
+                0x01e19708                . = ALIGN (0x4)
+                0x01e19708                media_text_start = .
+                0x01e19708                . = ALIGN (0x4)
  *(.dns_16k_data)
  *(.dns_8k_data)
  *(.jlsp_const)
  *(.jlsp_code)
  *(.aec_code)
- .aec_code      0x01e196cc      0xea6 cpu/br25/tools/sdk.elf.o
+ .aec_code      0x01e19708      0xea6 cpu/br25/tools/sdk.elf.o
  *(.aec_const)
  *(.der_code)
  *(.der_const)
  *(.nlp_code)
- .nlp_code      0x01e1a572      0x2d2 cpu/br25/tools/sdk.elf.o
+ .nlp_code      0x01e1a5ae      0x2d2 cpu/br25/tools/sdk.elf.o
  *(.nlp_const)
  *(.qmf_code)
- .qmf_code      0x01e1a844      0x1a6 cpu/br25/tools/sdk.elf.o
+ .qmf_code      0x01e1a880      0x1a6 cpu/br25/tools/sdk.elf.o
  *(.qmf_const)
- *fill*         0x01e1a9ea        0x2 
- .qmf_const     0x01e1a9ec       0x18 cpu/br25/tools/sdk.elf.o
+ *fill*         0x01e1aa26        0x2 
+ .qmf_const     0x01e1aa28       0x18 cpu/br25/tools/sdk.elf.o
  *(.bt_audioplc_sparse_code)
  *(.bt_audioplc_code)
  *(.bt_audioplc_const)
-                0x01e1aa04                . = ALIGN (0x4)
+                0x01e1aa40                . = ALIGN (0x4)
  *(.res_code)
  *(.res_const)
-                0x01e1aa04                . = ALIGN (0x4)
+                0x01e1aa40                . = ALIGN (0x4)
  *(.ns_code)
- .ns_code       0x01e1aa04      0x3aa cpu/br25/tools/sdk.elf.o
+ .ns_code       0x01e1aa40      0x3aa cpu/br25/tools/sdk.elf.o
  *(.ns_const)
  *(.opcore_maskrom)
  .opcore_maskrom
-                0x01e1adae      0x1a4 cpu/br25/tools/sdk.elf.o
+                0x01e1adea      0x1a4 cpu/br25/tools/sdk.elf.o
  *(.bark_const)
- *fill*         0x01e1af52        0x2 
- .bark_const    0x01e1af54     0x1eb0 cpu/br25/tools/sdk.elf.o
-                0x01e1ce04                . = ALIGN (0x4)
+ *fill*         0x01e1af8e        0x2 
+ .bark_const    0x01e1af90     0x1eb0 cpu/br25/tools/sdk.elf.o
+                0x01e1ce40                . = ALIGN (0x4)
  *(.pcm_code)
- .pcm_code      0x01e1ce04      0x212 cpu/br25/tools/sdk.elf.o
+ .pcm_code      0x01e1ce40      0x212 cpu/br25/tools/sdk.elf.o
  *(.pcm_const)
  *(.g729_code)
- .g729_code     0x01e1d016      0x1ea cpu/br25/tools/sdk.elf.o
+ .g729_code     0x01e1d052      0x1ea cpu/br25/tools/sdk.elf.o
  *(.g729_const)
  *(.g726_code)
  *(.g726_const)
@@ -3752,13 +3753,13 @@ END GROUP
  *(.f2a_dec_const)
  *(.f2a_dec_sparse_code)
  *(.wtg_dec_code)
- .wtg_dec_code  0x01e1d200      0xda4 cpu/br25/tools/sdk.elf.o
+ .wtg_dec_code  0x01e1d23c      0xda4 cpu/br25/tools/sdk.elf.o
  *(.wtg_dec_const)
  .wtg_dec_const
-                0x01e1dfa4     0x10b4 cpu/br25/tools/sdk.elf.o
+                0x01e1dfe0     0x10b4 cpu/br25/tools/sdk.elf.o
  *(.wtg_dec_sparse_code)
  .wtg_dec_sparse_code
-                0x01e1f058       0xe4 cpu/br25/tools/sdk.elf.o
+                0x01e1f094       0xe4 cpu/br25/tools/sdk.elf.o
  *(.wtg_dec_sparse_const)
  *(.wtgv2_code)
  *(.wtgv2_const)
@@ -3767,28 +3768,28 @@ END GROUP
  *(.wtgv2dec_str)
  *(.wtg_decv2_sparse_code)
  *(.bfilt_code)
-                0x01e1f13c                . = ALIGN (0x4)
+                0x01e1f178                . = ALIGN (0x4)
  *(.mp3_decstream_const)
  *(.mp3_decstream_code)
  *(.mp3_decstream_sparse_code)
  *(.mp3_decstream_sparse_const)
  *(.mp3_dec_sparse_code)
  .mp3_dec_sparse_code
-                0x01e1f13c     0x14f0 cpu/br25/tools/sdk.elf.o
+                0x01e1f178     0x14f0 cpu/br25/tools/sdk.elf.o
  *(.mp3_dec_sparse_const)
  *(.mp3_dec_code)
- .mp3_dec_code  0x01e2062c     0x32c6 cpu/br25/tools/sdk.elf.o
+ .mp3_dec_code  0x01e20668     0x32c6 cpu/br25/tools/sdk.elf.o
  *(.mp3_dec_const)
- *fill*         0x01e238f2        0x2 
+ *fill*         0x01e2392e        0x2 
  .mp3_dec_const
-                0x01e238f4     0x2b2c cpu/br25/tools/sdk.elf.o
+                0x01e23930     0x2b2c cpu/br25/tools/sdk.elf.o
  *(.mp3_const)
  *(.mp3_code)
- .mp3_code      0x01e26420      0x414 cpu/br25/tools/sdk.elf.o
+ .mp3_code      0x01e2645c      0x414 cpu/br25/tools/sdk.elf.o
  *(.msbc_code)
- .msbc_code     0x01e26834      0x5c4 cpu/br25/tools/sdk.elf.o
+ .msbc_code     0x01e26870      0x5c4 cpu/br25/tools/sdk.elf.o
  *(.msbc_const)
- .msbc_const    0x01e26df8       0x4e cpu/br25/tools/sdk.elf.o
+ .msbc_const    0x01e26e34       0x4e cpu/br25/tools/sdk.elf.o
  *(.mty_code)
  *(.mty_const)
  *(.mp3tsy_dec_code)
@@ -3796,22 +3797,22 @@ END GROUP
  *(.mp3tsy_dec_sparse_code)
  *(.mp3tsy_dec_sparse_const)
  *(.sbc_code)
- .sbc_code      0x01e26e46      0x3f6 cpu/br25/tools/sdk.elf.o
+ .sbc_code      0x01e26e82      0x3f6 cpu/br25/tools/sdk.elf.o
  *(.sbc_const)
- .sbc_const     0x01e2723c        0xc cpu/br25/tools/sdk.elf.o
+ .sbc_const     0x01e27278        0xc cpu/br25/tools/sdk.elf.o
  *(.sine_code)
  *(.sine_const)
  *(.wma_code)
- .wma_code      0x01e27248      0x3cc cpu/br25/tools/sdk.elf.o
+ .wma_code      0x01e27284      0x3cc cpu/br25/tools/sdk.elf.o
  *(.wma_const)
  *(.wma_dec_code)
- .wma_dec_code  0x01e27614     0x2a04 cpu/br25/tools/sdk.elf.o
+ .wma_dec_code  0x01e27650     0x2a04 cpu/br25/tools/sdk.elf.o
  *(.wma_dec_const)
  .wma_dec_const
-                0x01e2a018     0x4130 cpu/br25/tools/sdk.elf.o
+                0x01e2a054     0x4130 cpu/br25/tools/sdk.elf.o
  *(.wma_dec_sparse_code)
  .wma_dec_sparse_code
-                0x01e2e148     0x10dc cpu/br25/tools/sdk.elf.o
+                0x01e2e184     0x10dc cpu/br25/tools/sdk.elf.o
  *(.wma_dec_sparse_const)
  *(.wma_decstream_const)
  *(.wma_decstream_code)
@@ -3823,21 +3824,21 @@ END GROUP
  *(.midi_const)
  *(.audio_decoder_code)
  .audio_decoder_code
-                0x01e2f224      0x8ce cpu/br25/tools/sdk.elf.o
+                0x01e2f260      0x8ce cpu/br25/tools/sdk.elf.o
  *(.audio_decoder_const)
  *(.mp3_encode_code)
  .mp3_encode_code
-                0x01e2faf2      0x1cc cpu/br25/tools/sdk.elf.o
+                0x01e2fb2e      0x1cc cpu/br25/tools/sdk.elf.o
  *(.mp3_encode_const)
  *(.media_device_code)
  *(.media_device_const)
  *(.audio_encoder_code)
  *(.audio_encoder_const)
  *(.mixer_code)
- .mixer_code    0x01e2fcbe      0x72e cpu/br25/tools/sdk.elf.o
+ .mixer_code    0x01e2fcfa      0x72e cpu/br25/tools/sdk.elf.o
  *(.mixer_const)
  *(.stream_code)
- .stream_code   0x01e303ec      0x204 cpu/br25/tools/sdk.elf.o
+ .stream_code   0x01e30428      0x204 cpu/br25/tools/sdk.elf.o
  *(.stream_const)
  *(.dec_server_code)
  *(.dec_server_const)
@@ -3850,86 +3851,86 @@ END GROUP
  *(.wireless_sync_code)
  *(.wireless_sync_const)
  *(.fft_code)
- .fft_code      0x01e305f0      0x14c cpu/br25/tools/sdk.elf.o
+ .fft_code      0x01e3062c      0x14c cpu/br25/tools/sdk.elf.o
  *(.fft_const)
  *(.mp3_enc_code)
  *(.mp3_enc_const)
  *(.mp3_enc_sparse_code)
  *(.mp3_enc_sparse_const)
-                0x01e3073c                . = ALIGN (0x4)
+                0x01e30778                . = ALIGN (0x4)
  *(.mp2_encode_code)
  .mp2_encode_code
-                0x01e3073c      0x146 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
-                0x01e3073c                mp2_put_bits
+                0x01e30778      0x146 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+                0x01e30778                mp2_put_bits
  .mp2_encode_code
-                0x01e30882      0x7da include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
-                0x01e30882                compute_bit_allocation
-                0x01e30a9a                encode_init
-                0x01e30bec                compute_scale_factors
-                0x01e30ca6                get_header_length
-                0x01e30cf8                encode_frame_header
-                0x01e30ee0                encode_frame_data
+                0x01e308be      0x7da include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+                0x01e308be                compute_bit_allocation
+                0x01e30ad6                encode_init
+                0x01e30c28                compute_scale_factors
+                0x01e30ce2                get_header_length
+                0x01e30d34                encode_frame_header
+                0x01e30f1c                encode_frame_data
  .mp2_encode_code
-                0x01e3105c      0x562 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
-                0x01e3105c                mp2_filter
+                0x01e31098      0x562 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+                0x01e31098                mp2_filter
  *(.mp2_encode_const)
- *fill*         0x01e315be        0x2 
+ *fill*         0x01e315fa        0x2 
  .mp2_encode_const
-                0x01e315c0       0x1c include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
-                0x01e315c0                mp2contobj_ops
+                0x01e315fc       0x1c include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+                0x01e315fc                mp2contobj_ops
  .mp2_encode_const
-                0x01e315dc      0x374 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
-                0x01e315dc                mp3_freq_tab
-                0x01e315e2                mp2_bitrate_table
-                0x01e3162d                sblimt
-                0x01e31632                quant_steps
-                0x01e31654                quant_bits
-                0x01e31666                total_quant_bits
-                0x01e31688                alloc_sb1
-                0x01e316a6                alloc_table_1
-                0x01e316d2                alloc_sb3
-                0x01e316de                alloc_table_3
-                0x01e316f6                alloc_sb4
-                0x01e31714                alloc_table_4
-                0x01e31730                quant_snr
-                0x01e31754                alloc_sbs
-                0x01e31768                alloc_tables
-                0x01e3177c                nb_scale_factors
-                0x01e31780                scale_factor_table
-                0x01e31880                scale_factor_shift
-                0x01e318c0                scale_factor_mult
-                0x01e31940                mp2_ff_log2_tab
+                0x01e31618      0x374 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+                0x01e31618                mp3_freq_tab
+                0x01e3161e                mp2_bitrate_table
+                0x01e31669                sblimt
+                0x01e3166e                quant_steps
+                0x01e31690                quant_bits
+                0x01e316a2                total_quant_bits
+                0x01e316c4                alloc_sb1
+                0x01e316e2                alloc_table_1
+                0x01e3170e                alloc_sb3
+                0x01e3171a                alloc_table_3
+                0x01e31732                alloc_sb4
+                0x01e31750                alloc_table_4
+                0x01e3176c                quant_snr
+                0x01e31790                alloc_sbs
+                0x01e317a4                alloc_tables
+                0x01e317b8                nb_scale_factors
+                0x01e317bc                scale_factor_table
+                0x01e318bc                scale_factor_shift
+                0x01e318fc                scale_factor_mult
+                0x01e3197c                mp2_ff_log2_tab
  .mp2_encode_const
-                0x01e31950      0xca0 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
-                0x01e31950                mp2_filter_bank
-                0x01e32150                mp2_costab32
-                0x01e321cc                bitinv32
-                0x01e321ec                mpa_enwindow
+                0x01e3198c      0xca0 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+                0x01e3198c                mp2_filter_bank
+                0x01e3218c                mp2_costab32
+                0x01e32208                bitinv32
+                0x01e32228                mpa_enwindow
  *(.mp2_encode_sparse_code)
  .mp2_encode_sparse_code
-                0x01e325f0      0x15a include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
-                0x01e32742                get_mp2_ops
+                0x01e3262c      0x15a include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+                0x01e3277e                get_mp2_ops
  *(.mp2_encode_sparse_const)
-                0x01e3274c                . = ALIGN (0x4)
- *fill*         0x01e3274a        0x2 
+                0x01e32788                . = ALIGN (0x4)
+ *fill*         0x01e32786        0x2 
  *(.adpcm_encode_code)
  .adpcm_encode_code
-                0x01e3274c      0x50c include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
-                0x01e327c2                adpcm_coder
+                0x01e32788      0x50c include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+                0x01e327fe                adpcm_coder
  *(.adpcm_encode_const)
  .adpcm_encode_const
-                0x01e32c58       0x1c include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
-                0x01e32c58                msadpcmcontobj_ops
+                0x01e32c94       0x1c include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+                0x01e32c94                msadpcmcontobj_ops
  .adpcm_encode_const
-                0x01e32c74       0x78 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
-                0x01e32c74                ms_AdaptCoeff1
-                0x01e32c90                ms_AdaptCoeff2
+                0x01e32cb0       0x78 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+                0x01e32cb0                ms_AdaptCoeff1
+                0x01e32ccc                ms_AdaptCoeff2
  *(.adpcm_encode_sparse_code)
  .adpcm_encode_sparse_code
-                0x01e32cec      0x1a0 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
-                0x01e32e84                get_msenadpcm_ops
+                0x01e32d28      0x1a0 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+                0x01e32ec0                get_msenadpcm_ops
  *(.adpcm_encode_sparse_const)
-                0x01e32e8c                . = ALIGN (0x4)
+                0x01e32ec8                . = ALIGN (0x4)
  *(.m4a_dec_sparse_code)
  *(.m4a_dec_sparse_const)
  *(.aac_dec_sparse_code)
@@ -3942,17 +3943,17 @@ END GROUP
  *(.res_sparse_code)
  *(.ns_sparse_code)
  .ns_sparse_code
-                0x01e32e8c      0x3b0 cpu/br25/tools/sdk.elf.o
+                0x01e32ec8      0x3b0 cpu/br25/tools/sdk.elf.o
  *(.aec_sparse_code)
  .aec_sparse_code
-                0x01e3323c       0xf2 cpu/br25/tools/sdk.elf.o
+                0x01e33278       0xf2 cpu/br25/tools/sdk.elf.o
  *(.nlp_sparse_code)
  .nlp_sparse_code
-                0x01e3332e      0x10e cpu/br25/tools/sdk.elf.o
+                0x01e3336a      0x10e cpu/br25/tools/sdk.elf.o
  *(.der_sparse_code)
  *(.qmf_sparse_code)
  .qmf_sparse_code
-                0x01e3343c       0x26 cpu/br25/tools/sdk.elf.o
+                0x01e33478       0x26 cpu/br25/tools/sdk.elf.o
  *(.sms_const)
  *(.sms_sparse_code)
  *(.sms_code)
@@ -3977,30 +3978,30 @@ END GROUP
  *(.audio_bfilt_const)
  *(.audio_buf_sync_code)
  .audio_buf_sync_code
-                0x01e33462       0xe2 cpu/br25/tools/sdk.elf.o
+                0x01e3349e       0xe2 cpu/br25/tools/sdk.elf.o
  *(.audio_buf_sync_const)
  *(.audio_dec_app_code)
  .audio_dec_app_code
-                0x01e33544      0xab8 cpu/br25/tools/sdk.elf.o
+                0x01e33580      0xab8 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_const)
  .audio_dec_app_const
-                0x01e33ffc       0x6c cpu/br25/tools/sdk.elf.o
+                0x01e34038       0x6c cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_sync_code)
  .audio_dec_app_sync_code
-                0x01e34068        0x2 cpu/br25/tools/sdk.elf.o
+                0x01e340a4        0x2 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_sync_const)
  *(.audio_dec_app_event_callback)
  .audio_dec_app_event_callback
-                0x01e3406a       0x5a cpu/br25/tools/sdk.elf.o
+                0x01e340a6       0x5a cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_dec_run)
  .audio_dec_app_dec_run
-                0x01e340c4       0xf8 cpu/br25/tools/sdk.elf.o
+                0x01e34100       0xf8 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_normal_run)
  .audio_dec_app_normal_run
-                0x01e341bc       0x56 cpu/br25/tools/sdk.elf.o
+                0x01e341f8       0x56 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_tone_event_callback)
  .audio_dec_tone_event_callback
-                0x01e34212      0x112 cpu/br25/tools/sdk.elf.o
+                0x01e3424e      0x112 cpu/br25/tools/sdk.elf.o
  *(.audio_dig_vol_code)
  *(.audio_dig_vol_const)
  *(.audio_echo_reverb_code)
@@ -4018,17 +4019,17 @@ END GROUP
  *(.audio_energy_detect_const)
  *(.audio_eq_code)
  .audio_eq_code
-                0x01e34324      0x990 cpu/br25/tools/sdk.elf.o
+                0x01e34360      0x990 cpu/br25/tools/sdk.elf.o
  *(.audio_eq_const)
  *(.eq_run_code)
- .eq_run_code   0x01e34cb4      0x25e cpu/br25/tools/sdk.elf.o
+ .eq_run_code   0x01e34cf0      0x25e cpu/br25/tools/sdk.elf.o
  *(.hw_eq_code)
- .hw_eq_code    0x01e34f12      0x6ca cpu/br25/tools/sdk.elf.o
+ .hw_eq_code    0x01e34f4e      0x6ca cpu/br25/tools/sdk.elf.o
  *(.hw_eq_const)
- .hw_eq_const   0x01e355dc       0x14 cpu/br25/tools/sdk.elf.o
+ .hw_eq_const   0x01e35618       0x14 cpu/br25/tools/sdk.elf.o
  *(.audio_drc_code)
  .audio_drc_code
-                0x01e355f0        0xa cpu/br25/tools/sdk.elf.o
+                0x01e3562c        0xa cpu/br25/tools/sdk.elf.o
  *(.audio_drc_const)
  *(.drc_run_code)
  *(.sw_drc_code)
@@ -4058,7 +4059,7 @@ END GROUP
  *(.noisegate_sparse_const)
  *(.audio_output_dac_code)
  .audio_output_dac_code
-                0x01e355fa      0x3da cpu/br25/tools/sdk.elf.o
+                0x01e35636      0x3da cpu/br25/tools/sdk.elf.o
  *(.audio_output_dac_const)
  *(.audio_pemafrow_code)
  *(.audio_pemafrow_const)
@@ -4092,7 +4093,7 @@ END GROUP
  *(.spectrum_eq_const)
  *(.spectrum_fft_code)
  .spectrum_fft_code
-                0x01e359d4      0x47a cpu/br25/tools/sdk.elf.o
+                0x01e35a10      0x47a cpu/br25/tools/sdk.elf.o
  *(.spectrum_fft_const)
  *(.audio_localtws_code)
  *(.audio_localtws_const)
@@ -4100,33 +4101,33 @@ END GROUP
  *(.audio_dec_localtws_const)
  *(.audio_dec_a2dp_code)
  .audio_dec_a2dp_code
-                0x01e35e4e      0x4f6 cpu/br25/tools/sdk.elf.o
+                0x01e35e8a      0x4f6 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_a2dp_const)
  .audio_dec_a2dp_const
-                0x01e36344       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e36380       0x2c cpu/br25/tools/sdk.elf.o
  *(.audio_dec_esco_code)
  .audio_dec_esco_code
-                0x01e36370      0x240 cpu/br25/tools/sdk.elf.o
+                0x01e363ac      0x240 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_esco_const)
  .audio_dec_esco_const
-                0x01e365b0       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e365ec       0x2c cpu/br25/tools/sdk.elf.o
  *(.audio_dec_file_code)
  .audio_dec_file_code
-                0x01e365dc      0x484 cpu/br25/tools/sdk.elf.o
+                0x01e36618      0x484 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_file_const)
  .audio_dec_file_const
-                0x01e36a60       0x10 cpu/br25/tools/sdk.elf.o
+                0x01e36a9c       0x10 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_pcm_code)
  *(.audio_dec_pcm_const)
  *(.audio_resample_code)
  *(.audio_resample_const)
  *(.audio_splicing_code)
  .audio_splicing_code
-                0x01e36a70      0x4da cpu/br25/tools/sdk.elf.o
+                0x01e36aac      0x4da cpu/br25/tools/sdk.elf.o
  *(.audio_splicing_const)
  *(.channel_switch_code)
  .channel_switch_code
-                0x01e36f4a       0x1c cpu/br25/tools/sdk.elf.o
+                0x01e36f86       0x1c cpu/br25/tools/sdk.elf.o
  *(.channel_switch_const)
  *(.aptx_decoder_code)
  *(.aptx_decoder_const)
@@ -4136,7 +4137,7 @@ END GROUP
  *(.speex_encoder_const)
  *(.sbc_encoder_code)
  .sbc_encoder_code
-                0x01e36f66      0x110 cpu/br25/tools/sdk.elf.o
+                0x01e36fa2      0x110 cpu/br25/tools/sdk.elf.o
  *(.sbc_encoder_const)
  *(.opus_encoder_code)
  *(.opus_encoder_const)
@@ -4144,188 +4145,188 @@ END GROUP
  *(.prevent_task_fill_const)
  *(.audio_cfifo_code)
  .audio_cfifo_code
-                0x01e37076      0x2b6 cpu/br25/tools/sdk.elf.o
+                0x01e370b2      0x2b6 cpu/br25/tools/sdk.elf.o
  *(.audio_cfifo_const)
  *(.audio_track_code)
  *(.audio_track_const)
  *(.audio_adc_code)
  .audio_adc_code
-                0x01e3732c       0x28 cpu/br25/tools/sdk.elf.o
+                0x01e37368       0x28 cpu/br25/tools/sdk.elf.o
  *(.audio_adc_const)
  *(.audio_dac_code)
  .audio_dac_code
-                0x01e37354      0xfa2 cpu/br25/tools/sdk.elf.o
+                0x01e37390      0xfa2 cpu/br25/tools/sdk.elf.o
  *(.audio_dac_const)
  .audio_dac_const
-                0x01e382f6       0x10 cpu/br25/tools/sdk.elf.o
+                0x01e38332       0x10 cpu/br25/tools/sdk.elf.o
  *(.audio_linein_code)
  *(.audio_linein_const)
  *(.audio_link_code)
  *(.audio_link_const)
  *(.audio_sample_sync_code)
  .audio_sample_sync_code
-                0x01e38306      0x55a cpu/br25/tools/sdk.elf.o
+                0x01e38342      0x55a cpu/br25/tools/sdk.elf.o
  *(.audio_sample_sync_const)
  *(.audio_wireless_sync_code)
  .audio_wireless_sync_code
-                0x01e38860      0x996 cpu/br25/tools/sdk.elf.o
+                0x01e3889c      0x996 cpu/br25/tools/sdk.elf.o
  *(.audio_wireless_sync_const)
  *(.audio_spdif_code)
  *(.audio_spdif_const)
  *(.audio_src_code)
  .audio_src_code
-                0x01e391f6       0xda cpu/br25/tools/sdk.elf.o
+                0x01e39232       0xda cpu/br25/tools/sdk.elf.o
  *(.audio_src_const)
  *(.audio_src_base_code)
  .audio_src_base_code
-                0x01e392d0      0x210 cpu/br25/tools/sdk.elf.o
+                0x01e3930c      0x210 cpu/br25/tools/sdk.elf.o
  *(.audio_src_base_const)
  *(.effectrs_sync_code)
  *(.effectrs_sync_const)
  *(.eq_design_code)
  .eq_design_code
-                0x01e394e0      0x530 cpu/br25/tools/sdk.elf.o
+                0x01e3951c      0x530 cpu/br25/tools/sdk.elf.o
  *(.eq_design_const)
  *(.iic_code)
  *(.iic_const)
  *(.mic_cap_code)
- .mic_cap_code  0x01e39a10      0x562 cpu/br25/tools/sdk.elf.o
+ .mic_cap_code  0x01e39a4c      0x562 cpu/br25/tools/sdk.elf.o
  *(.mic_cap_const)
  .mic_cap_const
-                0x01e39f72      0x4c6 cpu/br25/tools/sdk.elf.o
+                0x01e39fae      0x4c6 cpu/br25/tools/sdk.elf.o
  *(.sbc_hwaccel_code)
  .sbc_hwaccel_code
-                0x01e3a438      0x46c cpu/br25/tools/sdk.elf.o
+                0x01e3a474      0x46c cpu/br25/tools/sdk.elf.o
  *(.sbc_hwaccel_const)
-                0x01e3a8a4                . = ALIGN (0x4)
-                0x01e3a8a4                _audio_decoder_begin = .
-                0x01e3a8a4                PROVIDE (audio_decoder_begin, .)
+                0x01e3a8e0                . = ALIGN (0x4)
+                0x01e3a8e0                _audio_decoder_begin = .
+                0x01e3a8e0                PROVIDE (audio_decoder_begin, .)
  *(.audio_decoder)
  .audio_decoder
-                0x01e3a8a4      0x220 cpu/br25/tools/sdk.elf.o
-                0x01e3a8a4                wma_decoder
-                0x01e3a8e8                wav_decoder
-                0x01e3a92c                g729_decoder
-                0x01e3a970                mp3_decoder
-                0x01e3a9b4                pcm_decoder
-                0x01e3a9f8                sbc_decoder
-                0x01e3aa3c                msbc_decoder
-                0x01e3aa80                cvsd_decoder
-                0x01e3aac4                _audio_decoder_end = .
-                0x01e3aac4                PROVIDE (audio_decoder_end, .)
-                0x01e3aac4                _audio_encoder_begin = .
-                0x01e3aac4                PROVIDE (audio_encoder_begin, .)
+                0x01e3a8e0      0x220 cpu/br25/tools/sdk.elf.o
+                0x01e3a8e0                wma_decoder
+                0x01e3a924                wav_decoder
+                0x01e3a968                g729_decoder
+                0x01e3a9ac                mp3_decoder
+                0x01e3a9f0                pcm_decoder
+                0x01e3aa34                sbc_decoder
+                0x01e3aa78                msbc_decoder
+                0x01e3aabc                cvsd_decoder
+                0x01e3ab00                _audio_decoder_end = .
+                0x01e3ab00                PROVIDE (audio_decoder_end, .)
+                0x01e3ab00                _audio_encoder_begin = .
+                0x01e3ab00                PROVIDE (audio_encoder_begin, .)
  *(.audio_encoder)
  .audio_encoder
-                0x01e3aac4       0xa0 cpu/br25/tools/sdk.elf.o
-                0x01e3aac4                adpcm_encoder
-                0x01e3aae4                cvsd_encoder
-                0x01e3ab04                msbc_encoder
-                0x01e3ab24                sbc_encoder
-                0x01e3ab44                mp3_encoder
-                0x01e3ab64                _audio_encoder_end = .
-                0x01e3ab64                PROVIDE (audio_encoder_end, .)
-                0x01e3ab64                _audio_package_begin = .
+                0x01e3ab00       0xa0 cpu/br25/tools/sdk.elf.o
+                0x01e3ab00                adpcm_encoder
+                0x01e3ab20                cvsd_encoder
+                0x01e3ab40                msbc_encoder
+                0x01e3ab60                sbc_encoder
+                0x01e3ab80                mp3_encoder
+                0x01e3aba0                _audio_encoder_end = .
+                0x01e3aba0                PROVIDE (audio_encoder_end, .)
+                0x01e3aba0                _audio_package_begin = .
                 [!provide]                PROVIDE (audio_package_begin, .)
  *(.audio_package)
-                0x01e3ab64                _audio_package_end = .
+                0x01e3aba0                _audio_package_end = .
                 [!provide]                PROVIDE (audio_package_end, .)
-                0x01e3ab64                _audio_dev_begin = .
+                0x01e3aba0                _audio_dev_begin = .
                 [!provide]                PROVIDE (audio_dev_begin, .)
  *(.audio_device)
-                0x01e3ab64                _audio_dev_end = .
+                0x01e3aba0                _audio_dev_end = .
                 [!provide]                PROVIDE (audio_dev_end, .)
-                0x01e3ab64                _audio_hwaccel_begin = .
-                0x01e3ab64                PROVIDE (audio_hwaccel_begin, .)
+                0x01e3aba0                _audio_hwaccel_begin = .
+                0x01e3aba0                PROVIDE (audio_hwaccel_begin, .)
  *(.audio_hwaccel)
  .audio_hwaccel
-                0x01e3ab64       0x24 cpu/br25/tools/sdk.elf.o
-                0x01e3ab64                sbc_hwaccel
-                0x01e3ab88                _audio_hwaccel_end = .
-                0x01e3ab88                PROVIDE (audio_hwaccel_end, .)
-                0x01e3ab88                . = ALIGN (0x4)
-                0x01e3ab88                media_code_begin = .
+                0x01e3aba0       0x24 cpu/br25/tools/sdk.elf.o
+                0x01e3aba0                sbc_hwaccel
+                0x01e3abc4                _audio_hwaccel_end = .
+                0x01e3abc4                PROVIDE (audio_hwaccel_end, .)
+                0x01e3abc4                . = ALIGN (0x4)
+                0x01e3abc4                media_code_begin = .
  *(.media.*.text)
  .media.media_cpu.text
-                0x01e3ab88      0x132 cpu/br25/tools/sdk.elf.o
+                0x01e3abc4      0x132 cpu/br25/tools/sdk.elf.o
  .media.audio_decoder.text
-                0x01e3acba       0x44 cpu/br25/tools/sdk.elf.o
+                0x01e3acf6       0x44 cpu/br25/tools/sdk.elf.o
  .media.mixer.text
-                0x01e3acfe       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e3ad3a       0x2c cpu/br25/tools/sdk.elf.o
  .media.audio_stream.text
-                0x01e3ad2a       0x18 cpu/br25/tools/sdk.elf.o
+                0x01e3ad66       0x18 cpu/br25/tools/sdk.elf.o
  .media.effects.text
-                0x01e3ad42       0x38 cpu/br25/tools/sdk.elf.o
+                0x01e3ad7e       0x38 cpu/br25/tools/sdk.elf.o
  .media.audio_encoder.text
-                0x01e3ad7a     0x1814 cpu/br25/tools/sdk.elf.o
+                0x01e3adb6     0x181c cpu/br25/tools/sdk.elf.o
  .media.audio_libutils.text
-                0x01e3c58e       0x20 cpu/br25/tools/sdk.elf.o
-                0x01e3c5b0                . = ALIGN (0x4)
- *fill*         0x01e3c5ae        0x2 
+                0x01e3c5d2       0x20 cpu/br25/tools/sdk.elf.o
+                0x01e3c5f4                . = ALIGN (0x4)
+ *fill*         0x01e3c5f2        0x2 
  *(.bt_crossOver_const)
  *(.bt_crossOver_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.compressor_code)
  *(.compressor_const)
  *(.bt_compressor_const)
  *(.bt_compressor_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.limiter_code)
  *(.limiter_const)
  *(.bt_limiter_const)
  *(.bt_limiter_code)
  *(.drc_sparse_code)
  *(.drc_sparse_const)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.lib_pitchshift_code)
  *(.lib_pitchshift_const)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.sur_cal_const)
  *(.sur_cal_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.reverb_cal_sparse_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.dvol_ram_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.reverb_cal_const)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.reverb_cal_code)
-                0x01e3c5b0                . = ALIGN (0x4)
+                0x01e3c5f4                . = ALIGN (0x4)
  *(.stream_code_nor_run)
  .stream_code_nor_run
-                0x01e3c5b0      0x294 cpu/br25/tools/sdk.elf.o
+                0x01e3c5f4      0x294 cpu/br25/tools/sdk.elf.o
  *(.mixer_code_nor_run)
  .mixer_code_nor_run
-                0x01e3c844      0x656 cpu/br25/tools/sdk.elf.o
+                0x01e3c888      0x656 cpu/br25/tools/sdk.elf.o
  *(.audio_codec_code)
  .audio_codec_code
-                0x01e3ce9a      0x2d6 cpu/br25/tools/sdk.elf.o
+                0x01e3cede      0x2d6 cpu/br25/tools/sdk.elf.o
  *(.audio_codec_code_read_file)
  .audio_codec_code_read_file
-                0x01e3d170       0x44 cpu/br25/tools/sdk.elf.o
+                0x01e3d1b4       0x44 cpu/br25/tools/sdk.elf.o
  *(.audio_src_code_nor_run)
  .audio_src_code_nor_run
-                0x01e3d1b4      0x114 cpu/br25/tools/sdk.elf.o
+                0x01e3d1f8      0x114 cpu/br25/tools/sdk.elf.o
  *(.src_base_code_nor_run)
  .src_base_code_nor_run
-                0x01e3d2c8      0x31e cpu/br25/tools/sdk.elf.o
+                0x01e3d30c      0x31e cpu/br25/tools/sdk.elf.o
  *(.audio_dac_code_nor_run)
  .audio_dac_code_nor_run
-                0x01e3d5e6      0x3f0 cpu/br25/tools/sdk.elf.o
+                0x01e3d62a      0x3f0 cpu/br25/tools/sdk.elf.o
  *(.audio_cfifo_code_nor_run)
  .audio_cfifo_code_nor_run
-                0x01e3d9d6      0x3da cpu/br25/tools/sdk.elf.o
+                0x01e3da1a      0x3da cpu/br25/tools/sdk.elf.o
  */()
  *(.stream_code_copy_run)
  *(.mixer_code_out_run)
  .mixer_code_out_run
-                0x01e3ddb0      0x4a6 cpu/br25/tools/sdk.elf.o
+                0x01e3ddf4      0x4a6 cpu/br25/tools/sdk.elf.o
  *(.audio_codec_code_frame_file)
  .audio_codec_code_frame_file
-                0x01e3e256       0x40 cpu/br25/tools/sdk.elf.o
+                0x01e3e29a       0x40 cpu/br25/tools/sdk.elf.o
  *(.buf_sync_code_nor_run)
  .buf_sync_code_nor_run
-                0x01e3e296       0xb2 cpu/br25/tools/sdk.elf.o
+                0x01e3e2da       0xb2 cpu/br25/tools/sdk.elf.o
  *(.resample_fastcal_const)
  *(.resample_fastcal_code)
  *(.resample_fastcal_sparse_code)
@@ -4344,7 +4345,7 @@ END GROUP
  *(.audio_effect_adj_const)
  *(.audio_effect_adj_code)
  .audio_effect_adj_code
-                0x01e3e348      0x2f4 cpu/br25/tools/sdk.elf.o
+                0x01e3e38c      0x2f4 cpu/br25/tools/sdk.elf.o
  *(.pitchshifter_code)
  *(.pitchshifter_const)
  *(.pitchshifter_sparse_code)
@@ -4362,27 +4363,27 @@ END GROUP
  *(.flac_data)
  *(.flac_const)
  *(.flac_code)
-                0x01e3e63c                . = ALIGN (0x4)
-                0x01e3e63c                media_code_end = .
-                0x01e3e63c                . = ALIGN (0x4)
-                0x00003ab4                media_code_size = (media_code_end - media_code_begin)
-                0x01e3e63c                . = ALIGN (0x4)
-                0x01e3e63c                media_text_end = .
-                0x00024f70                media_code_total_size = (media_text_end - media_text_start)
-                0x01e3e63c                . = ALIGN (0x4)
+                0x01e3e680                . = ALIGN (0x4)
+                0x01e3e680                media_code_end = .
+                0x01e3e680                . = ALIGN (0x4)
+                0x00003abc                media_code_size = (media_code_end - media_code_begin)
+                0x01e3e680                . = ALIGN (0x4)
+                0x01e3e680                media_text_end = .
+                0x00024f78                media_code_total_size = (media_text_end - media_text_start)
+                0x01e3e680                . = ALIGN (0x4)
  *(.wav_dec_sparse_code)
  .wav_dec_sparse_code
-                0x01e3e63c      0x702 cpu/br25/tools/sdk.elf.o
+                0x01e3e680      0x702 cpu/br25/tools/sdk.elf.o
  *(.wav_dec_sparse_const)
  *(.wav_dec_code)
- .wav_dec_code  0x01e3ed3e      0xc76 cpu/br25/tools/sdk.elf.o
+ .wav_dec_code  0x01e3ed82      0xc76 cpu/br25/tools/sdk.elf.o
  *(.wav_dec_const)
  .wav_dec_const
-                0x01e3f9b4      0x228 cpu/br25/tools/sdk.elf.o
+                0x01e3f9f8      0x228 cpu/br25/tools/sdk.elf.o
  *(.wav_const)
  *(.wav_code)
- .wav_code      0x01e3fbdc      0x300 cpu/br25/tools/sdk.elf.o
-                0x01e3fedc                . = ALIGN (0x4)
+ .wav_code      0x01e3fc20      0x300 cpu/br25/tools/sdk.elf.o
+                0x01e3ff20                . = ALIGN (0x4)
  *(.amr_const)
  *(.amr_code)
  *(.amr_dec_const)
@@ -4390,7 +4391,7 @@ END GROUP
  *(.amr_dec_sparse_code)
  *(.amr_dec_sparse_const)
  *(.amr_dec_ff_const)
-                0x01e3fedc                . = ALIGN (0x4)
+                0x01e3ff20                . = ALIGN (0x4)
  *(.ape_dec_sparse_code)
  *(.ape_dec_sparse_const)
  *(.ape_dec_code)
@@ -4398,263 +4399,263 @@ END GROUP
  *(.ape_bss)
  *(.ape_const)
  *(.ape_code)
-                0x01e3fedc                . = ALIGN (0x4)
+                0x01e3ff20                . = ALIGN (0x4)
  *(.flac_dec_sparse_code)
  *(.flac_dec_sparse_const)
  *(.flac_dec_code)
  *(.flac_dec_const)
  *(.flac_const)
  *(.flac_code)
-                0x01e3fedc                . = ALIGN (0x4)
+                0x01e3ff20                . = ALIGN (0x4)
  *(.alac_dec_code)
-                0x01e3fedc                . = ALIGN (0x4)
-                0x01e3fedc                . = ALIGN (0x4)
-                0x01e3fedc                _SPI_CODE_START = .
+                0x01e3ff20                . = ALIGN (0x4)
+                0x01e3ff20                . = ALIGN (0x4)
+                0x01e3ff20                _SPI_CODE_START = .
  *(.spi_code)
-                0x01e3fedc                . = ALIGN (0x4)
-                0x01e3fedc                _SPI_CODE_END = .
+                0x01e3ff20                . = ALIGN (0x4)
+                0x01e3ff20                _SPI_CODE_END = .
  *(.text*)
- .text          0x01e3fedc     0xb382 cpu/br25/tools/sdk.elf.o
-                0x01e40a2a                update_result_get
-                0x01e41414                __errno
-                0x01e4142e                main
-                0x01e49bf4                uart_update_set_nvram
-                0x01e49c5e                app_bank_init
-                0x01e4a132                exception_analyze
+ .text          0x01e3ff20     0xb704 cpu/br25/tools/sdk.elf.o
+                0x01e40a70                update_result_get
+                0x01e4145a                __errno
+                0x01e41474                main
+                0x01e49c44                uart_update_set_nvram
+                0x01e49cae                app_bank_init
+                0x01e4a4f8                exception_analyze
  .text._ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealE15QueryBufferSizeEii
-                0x01e4b25e       0x14 cpu/br25/tools/sdk.elf.o
+                0x01e4b624       0x14 cpu/br25/tools/sdk.elf.o
  .text._ZN19MCRA_NoiseEstimatorI9floatRealE15QueryBufferSizeEi
-                0x01e4b272        0xa cpu/br25/tools/sdk.elf.o
+                0x01e4b638        0xa cpu/br25/tools/sdk.elf.o
  .text._ZN34SingleChannelNoiseSuppressorInBarkI9floatReal12floatComplexE19QueryTempBufferSizeEii
-                0x01e4b27c        0xe cpu/br25/tools/sdk.elf.o
+                0x01e4b642        0xe cpu/br25/tools/sdk.elf.o
  .text._ZN3FFTI9floatReal12floatComplexEC2Eii
-                0x01e4b28a       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e4b650       0x2c cpu/br25/tools/sdk.elf.o
  .text._Z15VectorMulScalarRK6VectorI9floatRealERK6ScalarIS0_ERS1_
-                0x01e4b2b6       0x2a cpu/br25/tools/sdk.elf.o
+                0x01e4b67c       0x2a cpu/br25/tools/sdk.elf.o
  .text._ZNK6MatrixI12floatComplexEclEiiii
-                0x01e4b2e0       0x3a cpu/br25/tools/sdk.elf.o
+                0x01e4b6a6       0x3a cpu/br25/tools/sdk.elf.o
  .text._ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealEC2EPS0_iiR3FFTIS0_S1_ERK6ScalarIS0_ESB_iSB_SB_
-                0x01e4b31a      0x1be cpu/br25/tools/sdk.elf.o
+                0x01e4b6e0      0x1be cpu/br25/tools/sdk.elf.o
  .text._ZNK6VectorI9floatRealEclEiii
-                0x01e4b4d8       0x32 cpu/br25/tools/sdk.elf.o
+                0x01e4b89e       0x32 cpu/br25/tools/sdk.elf.o
  .text._ZNK6VectorI12floatComplexEclEiii
-                0x01e4b50a       0x32 cpu/br25/tools/sdk.elf.o
+                0x01e4b8d0       0x32 cpu/br25/tools/sdk.elf.o
  .text._ZN18NonlinearProcessorI9floatReal12floatComplexEC2EPS0_iiRK6ScalarIS0_ES7_S7_S7_
-                0x01e4b53c      0x19e cpu/br25/tools/sdk.elf.o
+                0x01e4b902      0x19e cpu/br25/tools/sdk.elf.o
  .text._Z10VectorCopyRK6VectorI9floatRealERS_I11fixHalfRealE
-                0x01e4b6da       0x2a cpu/br25/tools/sdk.elf.o
+                0x01e4baa0       0x2a cpu/br25/tools/sdk.elf.o
  .text._ZN12STFTAnalyserI9floatReal12floatComplex11fixHalfRealEC2EPS0_iiRK6VectorIS2_ER3FFTIS0_S1_E
-                0x01e4b704       0x4e cpu/br25/tools/sdk.elf.o
+                0x01e4baca       0x4e cpu/br25/tools/sdk.elf.o
  .text._Z10VectorCopyRK6VectorI9floatRealERS1_
-                0x01e4b752       0x24 cpu/br25/tools/sdk.elf.o
+                0x01e4bb18       0x24 cpu/br25/tools/sdk.elf.o
  .text._ZN15STFTSynthesizerI9floatReal12floatComplex11fixHalfRealEC2EPS0_iiRK6VectorIS2_ER3FFTIS0_S1_E
-                0x01e4b776       0x4e cpu/br25/tools/sdk.elf.o
+                0x01e4bb3c       0x4e cpu/br25/tools/sdk.elf.o
  .text._Z9VectorSetRK6ScalarI9floatRealER6VectorIS0_E
-                0x01e4b7c4       0x16 cpu/br25/tools/sdk.elf.o
+                0x01e4bb8a       0x16 cpu/br25/tools/sdk.elf.o
  .text._Z16VectorMeanSquareRK6VectorI11fixHalfRealER6ScalarI9floatRealE
-                0x01e4b7da       0x38 cpu/br25/tools/sdk.elf.o
+                0x01e4bba0       0x38 cpu/br25/tools/sdk.elf.o
  .text._ZN11VectorArrayI11fixHalfRealEC2ERK6VectorIS0_Ei
-                0x01e4b812       0x2e cpu/br25/tools/sdk.elf.o
+                0x01e4bbd8       0x2e cpu/br25/tools/sdk.elf.o
  .text._ZN13dynamicVectorI12floatComplex9floatRealEC2ER9AllocatorIS1_Eii
-                0x01e4b840       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e4bc06       0x2c cpu/br25/tools/sdk.elf.o
  .text._ZN13dynamicVectorI9floatRealS0_EC2ER9AllocatorIS0_Eii
-                0x01e4b86c       0x28 cpu/br25/tools/sdk.elf.o
+                0x01e4bc32       0x28 cpu/br25/tools/sdk.elf.o
  .text._Z18MatrixAccessColumnRK6MatrixI12floatComplexER6VectorIS0_Ei
-                0x01e4b894       0x20 cpu/br25/tools/sdk.elf.o
+                0x01e4bc5a       0x20 cpu/br25/tools/sdk.elf.o
  .text._ZN13dynamicVectorI12floatComplex9floatRealED2Ev
-                0x01e4b8b4       0x1c cpu/br25/tools/sdk.elf.o
+                0x01e4bc7a       0x1c cpu/br25/tools/sdk.elf.o
  .text._Z10MatrixCopyRK6MatrixI12floatComplexERS1_
-                0x01e4b8d0       0x4c cpu/br25/tools/sdk.elf.o
+                0x01e4bc96       0x4c cpu/br25/tools/sdk.elf.o
  .text._Z18VectorOverlapShiftRK6VectorI11fixHalfRealERS_I9floatRealEi
-                0x01e4b91c       0x60 cpu/br25/tools/sdk.elf.o
+                0x01e4bce2       0x60 cpu/br25/tools/sdk.elf.o
  .text._Z23MatrixEwMulAndSumOneDimRK6MatrixI12floatComplexES3_R6VectorIS0_Ei
-                0x01e4b97c       0x88 cpu/br25/tools/sdk.elf.o
+                0x01e4bd42       0x88 cpu/br25/tools/sdk.elf.o
  .text._Z11VectorMinusRK6VectorI11fixHalfRealERKS_I9floatRealERS5_
-                0x01e4ba04       0x3e cpu/br25/tools/sdk.elf.o
+                0x01e4bdca       0x3e cpu/br25/tools/sdk.elf.o
  .text._Z16VectorMeanSquareRK6VectorI9floatRealER6ScalarIS0_E
-                0x01e4ba42       0x32 cpu/br25/tools/sdk.elf.o
+                0x01e4be08       0x32 cpu/br25/tools/sdk.elf.o
  .text._Z7logAprxI9floatRealEvRK6ScalarIT_ERS3_
-                0x01e4ba74       0x34 cpu/br25/tools/sdk.elf.o
+                0x01e4be3a       0x34 cpu/br25/tools/sdk.elf.o
  .text._Z9log10AprxI9floatRealEvRK6ScalarIT_ERS3_
-                0x01e4baa8       0x1a cpu/br25/tools/sdk.elf.o
+                0x01e4be6e       0x1a cpu/br25/tools/sdk.elf.o
  .text._Z6mag2dbI9floatRealEvRK6ScalarIT_ERS3_
-                0x01e4bac2       0x1a cpu/br25/tools/sdk.elf.o
+                0x01e4be88       0x1a cpu/br25/tools/sdk.elf.o
  .text._ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealE18UpdateShadowWeightERK6VectorIS2_ES7_RKS4_IS0_ESA_
-                0x01e4badc      0x108 cpu/br25/tools/sdk.elf.o
+                0x01e4bea2      0x108 cpu/br25/tools/sdk.elf.o
  .text._Z25VectorMagRecursiveAverageRK6VectorI12floatComplexERS_I9floatRealERK6ScalarIS4_E
-                0x01e4bbe4       0x3c cpu/br25/tools/sdk.elf.o
+                0x01e4bfaa       0x3c cpu/br25/tools/sdk.elf.o
  .text._Z15VectorMulScalarRK6VectorI12floatComplexERK6ScalarI9floatRealERS1_
-                0x01e4bc20       0x2e cpu/br25/tools/sdk.elf.o
+                0x01e4bfe6       0x2e cpu/br25/tools/sdk.elf.o
  .text._Z24VectorConjElementwiseMulRK6VectorI12floatComplexES3_RS1_
-                0x01e4bc4e       0x44 cpu/br25/tools/sdk.elf.o
+                0x01e4c014       0x44 cpu/br25/tools/sdk.elf.o
  .text._Z10VectorPlusRK6VectorI9floatRealES3_RS1_
-                0x01e4bc92       0x38 cpu/br25/tools/sdk.elf.o
+                0x01e4c058       0x38 cpu/br25/tools/sdk.elf.o
  .text._Z12VectorDivideRK6VectorI12floatComplexERKS_I9floatRealERS1_RK6ScalarIS4_E
-                0x01e4bcca       0x3e cpu/br25/tools/sdk.elf.o
+                0x01e4c090       0x3e cpu/br25/tools/sdk.elf.o
  .text._Z10VectorPlusRK6VectorI12floatComplexES3_RS1_
-                0x01e4bd08       0x40 cpu/br25/tools/sdk.elf.o
+                0x01e4c0ce       0x40 cpu/br25/tools/sdk.elf.o
  .text._ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealE6filterER6VectorIS2_ES6_S6_P9AllocatorIS0_E
-                0x01e4bd48      0x37c cpu/br25/tools/sdk.elf.o
+                0x01e4c10e      0x37c cpu/br25/tools/sdk.elf.o
  .text._ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealE13SetPathChangeEv
-                0x01e4c0c4       0x70 cpu/br25/tools/sdk.elf.o
+                0x01e4c48a       0x70 cpu/br25/tools/sdk.elf.o
  .text._Z18VectorOverlapShiftRK6VectorI11fixHalfRealERS1_i
-                0x01e4c134        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4c4fa        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z20VectorElementwiseMulRK6VectorI11fixHalfRealES3_RS_I9floatRealE
-                0x01e4c138       0x64 cpu/br25/tools/sdk.elf.o
+                0x01e4c4fe       0x64 cpu/br25/tools/sdk.elf.o
  .text._ZN11VectorArrayI12floatComplexEppEi
-                0x01e4c19c        0xa cpu/br25/tools/sdk.elf.o
+                0x01e4c562        0xa cpu/br25/tools/sdk.elf.o
  .text._ZN12STFTAnalyserI9floatReal12floatComplex11fixHalfRealE7AnalyseERK6VectorIS2_ER11VectorArrayIS1_EP9AllocatorIS0_E
-                0x01e4c1a6       0x88 cpu/br25/tools/sdk.elf.o
+                0x01e4c56c       0x88 cpu/br25/tools/sdk.elf.o
  .text._Z9VectorMaxRK6ScalarI9floatRealER6VectorIS0_E
-                0x01e4c22e       0x20 cpu/br25/tools/sdk.elf.o
+                0x01e4c5f4       0x20 cpu/br25/tools/sdk.elf.o
  .text._Z22VectorElementwiseShiftRK6VectorI9floatRealERS1_i
-                0x01e4c24e        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4c614        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z22VectorRecursiveAverageRK6VectorI9floatRealERS1_RK6ScalarIS0_E
-                0x01e4c252       0x38 cpu/br25/tools/sdk.elf.o
+                0x01e4c618       0x38 cpu/br25/tools/sdk.elf.o
  .text._Z9VectorMinRK6VectorI9floatRealES3_RS1_
-                0x01e4c28a        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4c650        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z12VectorDivideRK6VectorI9floatRealES3_RS1_RK6ScalarIS0_E
-                0x01e4c28e        0x6 cpu/br25/tools/sdk.elf.o
+                0x01e4c654        0x6 cpu/br25/tools/sdk.elf.o
  .text._Z15VectorCompareBTRK6VectorI9floatRealES3_RS_IiE
-                0x01e4c294        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4c65a        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z19VectorElementwiseOrRK6VectorIiES2_RS0_
-                0x01e4c298       0x30 cpu/br25/tools/sdk.elf.o
+                0x01e4c65e       0x30 cpu/br25/tools/sdk.elf.o
  .text._Z21VectorConditionalCopyRK6VectorI9floatRealERKS_IiERS1_
-                0x01e4c2c8        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4c68e        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z16VectorPlusScalarRK6VectorI9floatRealERK6ScalarIS0_ERS1_
-                0x01e4c2cc        0x6 cpu/br25/tools/sdk.elf.o
+                0x01e4c692        0x6 cpu/br25/tools/sdk.elf.o
  .text._Z11VectorMinusRK6VectorI9floatRealES3_RS1_
-                0x01e4c2d2       0x38 cpu/br25/tools/sdk.elf.o
+                0x01e4c698       0x38 cpu/br25/tools/sdk.elf.o
  .text._Z20VectorElementwiseMulRK6VectorI9floatRealES3_RS1_
-                0x01e4c30a       0x30 cpu/br25/tools/sdk.elf.o
+                0x01e4c6d0       0x30 cpu/br25/tools/sdk.elf.o
  .text._ZN20IMCRA_NoiseEstimatorI9floatRealE8EstimateERK6VectorIS0_ERS3_R9AllocatorIS0_E
-                0x01e4c33a      0x2e6 cpu/br25/tools/sdk.elf.o
+                0x01e4c700      0x2e6 cpu/br25/tools/sdk.elf.o
  .text._ZN19MCRA_NoiseEstimatorI9floatRealE8EstimateERK6VectorIS0_ERS3_R9AllocatorIS0_E
-                0x01e4c620      0x19e cpu/br25/tools/sdk.elf.o
+                0x01e4c9e6      0x19e cpu/br25/tools/sdk.elf.o
  .text._Z9VectorMinRK6ScalarI9floatRealER6VectorIS0_E
-                0x01e4c7be       0x20 cpu/br25/tools/sdk.elf.o
+                0x01e4cb84       0x20 cpu/br25/tools/sdk.elf.o
  .text._Z20VectorElementwiseMulRK6VectorI12floatComplexERKS_I9floatRealERS1_
-                0x01e4c7de       0x36 cpu/br25/tools/sdk.elf.o
+                0x01e4cba4       0x36 cpu/br25/tools/sdk.elf.o
  .text._ZN34SingleChannelNoiseSuppressorInBarkI9floatReal12floatComplexE8SuppressERK11VectorArrayIS1_ERKS3_IS0_ES9_RS4_R9AllocatorIS0_E
-                0x01e4c814      0x27c cpu/br25/tools/sdk.elf.o
+                0x01e4cbda      0x27c cpu/br25/tools/sdk.elf.o
  .text._Z12VectorGetMagRK6VectorI12floatComplexERS_I9floatRealE
-                0x01e4ca90       0x2c cpu/br25/tools/sdk.elf.o
+                0x01e4ce56       0x2c cpu/br25/tools/sdk.elf.o
  .text._Z20VectorElementwiseMulRK6VectorI9floatRealERKS_I11fixHalfRealERS1_
-                0x01e4cabc       0x4c cpu/br25/tools/sdk.elf.o
+                0x01e4ce82       0x4c cpu/br25/tools/sdk.elf.o
  .text._ZN15STFTSynthesizerI9floatReal12floatComplex11fixHalfRealE10SynthesizeERK11VectorArrayIS1_ER6VectorIS2_EP9AllocatorIS0_E
-                0x01e4cb08       0xea cpu/br25/tools/sdk.elf.o
+                0x01e4cece       0xea cpu/br25/tools/sdk.elf.o
  .text._ZN13dynamicVectorI7fixRealS0_EC2ER9AllocatorIS0_Eii
-                0x01e4cbf2       0x26 cpu/br25/tools/sdk.elf.o
+                0x01e4cfb8       0x26 cpu/br25/tools/sdk.elf.o
  .text._Z10VectorCopyRK6VectorI11fixHalfRealERS_I7fixRealE
-                0x01e4cc18        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4cfde        0x4 cpu/br25/tools/sdk.elf.o
  .text._ZNK6VectorI7fixRealEclEiii
-                0x01e4cc1c       0x3c cpu/br25/tools/sdk.elf.o
+                0x01e4cfe2       0x3c cpu/br25/tools/sdk.elf.o
  .text._Z22VectorElementwiseShiftRK6VectorI7fixRealERS1_i
-                0x01e4cc58        0x6 cpu/br25/tools/sdk.elf.o
+                0x01e4d01e        0x6 cpu/br25/tools/sdk.elf.o
  .text._Z10VectorPlusRK6VectorI7fixRealES3_RS1_
-                0x01e4cc5e        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4d024        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z11VectorMinusRK6VectorI7fixRealES3_RS1_
-                0x01e4cc62        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4d028        0x4 cpu/br25/tools/sdk.elf.o
  .text._Z10VectorCopyRK6VectorI7fixRealERS_I11fixHalfRealE
-                0x01e4cc66        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4d02c        0x4 cpu/br25/tools/sdk.elf.o
  .text._ZN15StaticAllocatorI9floatRealE5allocEj
-                0x01e4cc6a        0xc cpu/br25/tools/sdk.elf.o
+                0x01e4d030        0xc cpu/br25/tools/sdk.elf.o
  .text._Z29VectorConjMulRecursiveAverageRK6VectorI12floatComplexES3_RS1_RK6ScalarI9floatRealE
-                0x01e4cc76       0x54 cpu/br25/tools/sdk.elf.o
+                0x01e4d03c       0x54 cpu/br25/tools/sdk.elf.o
  .text._Z15VectorMagAndDivRK6VectorI12floatComplexERKS_I9floatRealERK6ScalarIS4_ERS5_
-                0x01e4ccca       0x40 cpu/br25/tools/sdk.elf.o
+                0x01e4d090       0x40 cpu/br25/tools/sdk.elf.o
  .text._ZNK6VectorI9floatRealEclERK10Vectorzone
-                0x01e4cd0a       0x36 cpu/br25/tools/sdk.elf.o
+                0x01e4d0d0       0x36 cpu/br25/tools/sdk.elf.o
  .text._Z10VectorMeanRK6VectorI9floatRealER6ScalarIS0_E
-                0x01e4cd40       0x30 cpu/br25/tools/sdk.elf.o
+                0x01e4d106       0x30 cpu/br25/tools/sdk.elf.o
  .text._Z22VectorTernaryOperationRKPFvRK6ScalarI9floatRealES3_RS1_ERK6VectorIS0_ESC_RSA_
-                0x01e4cd70       0x76 cpu/br25/tools/sdk.elf.o
+                0x01e4d136       0x76 cpu/br25/tools/sdk.elf.o
  .text._ZN18NonlinearProcessorI9floatReal12floatComplexE17CalcSuppressCoeffERK6VectorIS0_ERS4_
-                0x01e4cde6      0x1aa cpu/br25/tools/sdk.elf.o
+                0x01e4d1ac      0x1aa cpu/br25/tools/sdk.elf.o
  .text._ZNK6VectorI12floatComplexEclERK10Vectorzone
-                0x01e4cf90       0x36 cpu/br25/tools/sdk.elf.o
+                0x01e4d356       0x36 cpu/br25/tools/sdk.elf.o
  .text._Z16VectorMeanSquareRK6VectorI12floatComplexER6ScalarI9floatRealE
-                0x01e4cfc6       0x3e cpu/br25/tools/sdk.elf.o
+                0x01e4d38c       0x3e cpu/br25/tools/sdk.elf.o
  .text._ZN18NonlinearProcessorI9floatReal12floatComplexE7ProcessERK11VectorArrayIS1_ES6_S6_RS4_P9AllocatorIS0_E
-                0x01e4d004      0x33e cpu/br25/tools/sdk.elf.o
+                0x01e4d3ca      0x33e cpu/br25/tools/sdk.elf.o
  .text._Z20VectorElementwiseMulRK6VectorI11fixHalfRealERKS_I9floatRealERS1_
-                0x01e4d342       0x40 cpu/br25/tools/sdk.elf.o
+                0x01e4d708       0x40 cpu/br25/tools/sdk.elf.o
  .text._Z7expAprxI9floatRealEvRK6ScalarIT_ERS3_
-                0x01e4d382       0x40 cpu/br25/tools/sdk.elf.o
+                0x01e4d748       0x40 cpu/br25/tools/sdk.elf.o
  .text._ZN15StaticAllocatorI9floatRealE4freeEPS0_j
-                0x01e4d3c2        0x8 cpu/br25/tools/sdk.elf.o
+                0x01e4d788        0x8 cpu/br25/tools/sdk.elf.o
  .text._Z7powAprxI9floatRealEvRK6ScalarIT_ES5_RS3_
-                0x01e4d3ca       0x3a cpu/br25/tools/sdk.elf.o
+                0x01e4d790       0x3a cpu/br25/tools/sdk.elf.o
  .text._Z8magnAprxI12floatComplex9floatRealEvRK6ScalarIT_ERS2_IT0_E
-                0x01e4d404        0x4 cpu/br25/tools/sdk.elf.o
+                0x01e4d7ca        0x4 cpu/br25/tools/sdk.elf.o
  .text._ZN15StaticAllocatorI7fixRealE5allocEj
-                0x01e4d408        0xc cpu/br25/tools/sdk.elf.o
+                0x01e4d7ce        0xc cpu/br25/tools/sdk.elf.o
  .text._ZN15StaticAllocatorI7fixRealE4freeEPS0_j
-                0x01e4d414        0x8 cpu/br25/tools/sdk.elf.o
- .text          0x01e4d41c       0x18 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strcat.o)
-                0x01e4d41c                strcat
- .text          0x01e4d434       0x26 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strncpy.o)
-                0x01e4d434                strncpy
- .text          0x01e4d45a       0x24 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strrchr.o)
-                0x01e4d45a                strrchr
- .text          0x01e4d47e       0x54 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strtok_r.o)
-                0x01e4d47e                __strtok_r
-                0x01e4d4ce                strtok_r
- .text          0x01e4d4d2      0x314 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(adddf3.o)
-                0x01e4d512                __adddf3
- .text          0x01e4d7e6      0x346 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(divdf3.o)
-                0x01e4d81c                __divdf3
- .text          0x01e4db2c      0x2fa C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(muldf3.o)
-                0x01e4db62                __muldf3
- .text          0x01e4de26        0x6 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(subdf3.o)
-                0x01e4de26                __subdf3
- .text          0x01e4de2c       0x10 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(udivdi3.o)
-                0x01e4de2c                __udivdi3
- .text          0x01e4de3c      0x226 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(udivmoddi4.o)
-                0x01e4de3c                __udivmoddi4
- .text          0x01e4e062       0x3c C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(fixunsdfsi.o)
-                0x01e4e062                __fixunsdfsi
- .text          0x01e4e09e       0x4c C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(floatsidf.o)
-                0x01e4e09e                __floatsidf
- .text          0x01e4e0ea       0x34 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(floatunsidf.o)
-                0x01e4e0ea                __floatunsidf
- .text          0x01e4e11e      0x142 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(truncdfsf2.o)
-                0x01e4e11e                __truncdfsf2
+                0x01e4d7da        0x8 cpu/br25/tools/sdk.elf.o
+ .text          0x01e4d7e2       0x18 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strcat.o)
+                0x01e4d7e2                strcat
+ .text          0x01e4d7fa       0x26 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strncpy.o)
+                0x01e4d7fa                strncpy
+ .text          0x01e4d820       0x24 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strrchr.o)
+                0x01e4d820                strrchr
+ .text          0x01e4d844       0x54 C:/JL/pi32/pi32v2-lib/r3/libc.a(lib_a-strtok_r.o)
+                0x01e4d844                __strtok_r
+                0x01e4d894                strtok_r
+ .text          0x01e4d898      0x314 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(adddf3.o)
+                0x01e4d8d8                __adddf3
+ .text          0x01e4dbac      0x346 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(divdf3.o)
+                0x01e4dbe2                __divdf3
+ .text          0x01e4def2      0x2fa C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(muldf3.o)
+                0x01e4df28                __muldf3
+ .text          0x01e4e1ec        0x6 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(subdf3.o)
+                0x01e4e1ec                __subdf3
+ .text          0x01e4e1f2       0x10 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(udivdi3.o)
+                0x01e4e1f2                __udivdi3
+ .text          0x01e4e202      0x226 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(udivmoddi4.o)
+                0x01e4e202                __udivmoddi4
+ .text          0x01e4e428       0x3c C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(fixunsdfsi.o)
+                0x01e4e428                __fixunsdfsi
+ .text          0x01e4e464       0x4c C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(floatsidf.o)
+                0x01e4e464                __floatsidf
+ .text          0x01e4e4b0       0x34 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(floatunsidf.o)
+                0x01e4e4b0                __floatunsidf
+ .text          0x01e4e4e4      0x142 C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a(truncdfsf2.o)
+                0x01e4e4e4                __truncdfsf2
  *(.LOG_TAG_CONST*)
  *(.rodata*)
  .rodata.str1.1
-                0x01e4e260      0xe24 cpu/br25/tools/sdk.elf.o
-                                0xe51 (size before relaxing)
- *fill*         0x01e4f084        0xc 
+                0x01e4e626      0xe4e cpu/br25/tools/sdk.elf.o
+                                0xe7b (size before relaxing)
+ *fill*         0x01e4f474        0xc 
  .rodata.str1.16
-                0x01e4f090      0x430 cpu/br25/tools/sdk.elf.o
-                                0x42a (size before relaxing)
- .rodata        0x01e4f4c0     0x52e4 cpu/br25/tools/sdk.elf.o
- .rodata.cst16  0x01e547a4       0x10 cpu/br25/tools/sdk.elf.o
- .rodata.cst8   0x01e547b4        0x8 cpu/br25/tools/sdk.elf.o
- .rodata.cst32  0x01e547bc       0x20 cpu/br25/tools/sdk.elf.o
+                0x01e4f480      0x490 cpu/br25/tools/sdk.elf.o
+                                0x48a (size before relaxing)
+ .rodata        0x01e4f910     0x5388 cpu/br25/tools/sdk.elf.o
+ .rodata.cst16  0x01e54c98       0x10 cpu/br25/tools/sdk.elf.o
+ .rodata.cst8   0x01e54ca8        0x8 cpu/br25/tools/sdk.elf.o
+ .rodata.cst32  0x01e54cb0       0x20 cpu/br25/tools/sdk.elf.o
  .rodata._ZTV15StaticAllocatorI9floatRealE
-                0x01e547dc       0x10 cpu/br25/tools/sdk.elf.o
+                0x01e54cd0       0x10 cpu/br25/tools/sdk.elf.o
  .rodata._ZTV15StaticAllocatorI7fixRealE
-                0x01e547ec       0x10 cpu/br25/tools/sdk.elf.o
-                0x01e547fc                . = ALIGN (0x4)
+                0x01e54ce0       0x10 cpu/br25/tools/sdk.elf.o
+                0x01e54cf0                . = ALIGN (0x4)
                 0x01f00100                PROVIDE (flash_code_end, (flash_code_begin + 0x100000))
-                0x01e547fc                update_code_start = .
+                0x01e54cf0                update_code_start = .
  *(.bt_updata_ram_code)
  .bt_updata_ram_code
-                0x01e547fc      0x176 cpu/br25/tools/sdk.elf.o
+                0x01e54cf0      0x176 cpu/br25/tools/sdk.elf.o
  *(.update_const)
- *fill*         0x01e54972        0x2 
- .update_const  0x01e54974      0x142 cpu/br25/tools/sdk.elf.o
+ *fill*         0x01e54e66        0x2 
+ .update_const  0x01e54e68      0x142 cpu/br25/tools/sdk.elf.o
  *(.update_code)
- .update_code   0x01e54ab6      0xe7c cpu/br25/tools/sdk.elf.o
-                0x01e55932                update_code_end = .
-                0x01e55932                driver_code_start = .
-                0x01e55932                CLOCK_CODE_START = .
+ .update_code   0x01e54faa      0xe7c cpu/br25/tools/sdk.elf.o
+                0x01e55e26                update_code_end = .
+                0x01e55e26                driver_code_start = .
+                0x01e55e26                CLOCK_CODE_START = .
  *(.clock_code)
- .clock_code    0x01e55932      0x59a cpu/br25/tools/sdk.elf.o
+ .clock_code    0x01e55e26      0x59a cpu/br25/tools/sdk.elf.o
  *(.clock_const)
- .clock_const   0x01e55ecc        0x4 cpu/br25/tools/sdk.elf.o
+ .clock_const   0x01e563c0        0x4 cpu/br25/tools/sdk.elf.o
                 0x0000059e                CLOCK_CODE_SIZE = ABSOLUTE ((. - CLOCK_CODE_START))
  *(.debug_code)
  *(.debug_const)
@@ -4662,33 +4663,33 @@ END GROUP
  *(.power_const)
  *(.uart_code)
  *(.uart_const)
-                0x01e55ed0                driver_code_end = .
-                0x01e55ed0                . = ALIGN (0x4)
-                0x01e55ed0                btctler_code_start = .
-                0x01e55ed0                BTCTLER_CONTROLLER_CODE_START = .
+                0x01e563c4                driver_code_end = .
+                0x01e563c4                . = ALIGN (0x4)
+                0x01e563c4                btctler_code_start = .
+                0x01e563c4                BTCTLER_CONTROLLER_CODE_START = .
  *(.bt_rf_const)
- .bt_rf_const   0x01e55ed0      0x411 cpu/br25/tools/sdk.elf.o
+ .bt_rf_const   0x01e563c4      0x411 cpu/br25/tools/sdk.elf.o
  *(.bt_rf_code)
- *fill*         0x01e562e1        0x1 
- .bt_rf_code    0x01e562e2     0x1890 cpu/br25/tools/sdk.elf.o
+ *fill*         0x01e567d5        0x1 
+ .bt_rf_code    0x01e567d6     0x1890 cpu/br25/tools/sdk.elf.o
  *(.vendor_manager_const)
  *(.vendor_manager_code)
  *(.device_manager_const)
  *(.device_manager_code)
  *(.hci_controller_const)
- *fill*         0x01e57b72        0x2 
+ *fill*         0x01e58066        0x2 
  .hci_controller_const
-                0x01e57b74       0x28 cpu/br25/tools/sdk.elf.o
+                0x01e58068       0x28 cpu/br25/tools/sdk.elf.o
  *(.hci_controller_code)
  .hci_controller_code
-                0x01e57b9c      0x7a0 cpu/br25/tools/sdk.elf.o
+                0x01e58090      0x7a0 cpu/br25/tools/sdk.elf.o
  *(.hci_interface_const)
  *(.hci_interface_code)
                 0x0000246c                BTCTLER_CONTROLLER_CODE_SIZE = ABSOLUTE ((. - BTCTLER_CONTROLLER_CODE_START))
-                0x01e5833c                BTCTLER_LE_CONTROLLER_CODE_START = .
+                0x01e58830                BTCTLER_LE_CONTROLLER_CODE_START = .
  *(.ble_rf_const)
  *(.ble_rf_code)
- .ble_rf_code   0x01e5833c        0x2 cpu/br25/tools/sdk.elf.o
+ .ble_rf_code   0x01e58830        0x2 cpu/br25/tools/sdk.elf.o
  *(.ble_ll_const)
  *(.ble_ll_code)
  *(.ble_hci_const)
@@ -4696,85 +4697,85 @@ END GROUP
  *(.classic_hci_const)
  *(.classic_hci_code)
                 0x00000002                BTCTLER_LE_CONTROLLER_CODE_SIZE = ABSOLUTE ((. - BTCTLER_LE_CONTROLLER_CODE_START))
-                0x01e5833e                BTCTLER_CL_CODE_START = .
+                0x01e58832                BTCTLER_CL_CODE_START = .
  *(.bredr_irq)
  *(.bredr_irq_code)
  *(.bredr_irq_const)
  *(.classic_lmp_const)
  .classic_lmp_const
-                0x01e5833e       0x14 cpu/br25/tools/sdk.elf.o
+                0x01e58832       0x14 cpu/br25/tools/sdk.elf.o
  *(.classic_lmp_auth_const)
  .classic_lmp_auth_const
-                0x01e58352      0x4f0 cpu/br25/tools/sdk.elf.o
+                0x01e58846      0x4f0 cpu/br25/tools/sdk.elf.o
  *(.classic_lmp_bigint_const)
  *(.classic_lmp_crypt_const)
  *(.classic_lmp_ecdh_const)
  *(.classic_lmp_hmac_const)
  *(.classic_lmp_code)
  .classic_lmp_code
-                0x01e58842     0x649c cpu/br25/tools/sdk.elf.o
+                0x01e58d36     0x649c cpu/br25/tools/sdk.elf.o
  *(.classic_lmp_auth_code)
  .classic_lmp_auth_code
-                0x01e5ecde      0x650 cpu/br25/tools/sdk.elf.o
+                0x01e5f1d2      0x650 cpu/br25/tools/sdk.elf.o
  *(.classic_lmp_bigint_code)
  *(.classic_lmp_crypt_code)
  *(.classic_lmp_ecdh_code)
  *(.classic_lmp_hmac_code)
  *(.classic_rf_const)
- *fill*         0x01e5f32e        0x2 
+ *fill*         0x01e5f822        0x2 
  .classic_rf_const
-                0x01e5f330      0x140 cpu/br25/tools/sdk.elf.o
+                0x01e5f824      0x140 cpu/br25/tools/sdk.elf.o
  *(.classic_rf_code)
  .classic_rf_code
-                0x01e5f470     0x534a cpu/br25/tools/sdk.elf.o
+                0x01e5f964     0x534a cpu/br25/tools/sdk.elf.o
  *(.classic_bb_const)
  *(.classic_bb_code)
                 0x0000c47c                BTCTLER_CL_CODE_SIZE = ABSOLUTE ((. - BTCTLER_CL_CODE_START))
-                0x01e647bc                . = ALIGN (0x4)
- *fill*         0x01e647ba        0x2 
+                0x01e64cb0                . = ALIGN (0x4)
+ *fill*         0x01e64cae        0x2 
  *(.classic_tws_const)
  *(.classic_tws_code)
  .classic_tws_code
-                0x01e647bc       0x22 cpu/br25/tools/sdk.elf.o
+                0x01e64cb0       0x22 cpu/br25/tools/sdk.elf.o
  *(.classic_tws_code.esco)
  *(.lmp_irq_code)
- .lmp_irq_code  0x01e647de      0x182 cpu/br25/tools/sdk.elf.o
+ .lmp_irq_code  0x01e64cd2      0x182 cpu/br25/tools/sdk.elf.o
  *(.link_bulk_code)
  .link_bulk_code
-                0x01e64960      0x376 cpu/br25/tools/sdk.elf.o
+                0x01e64e54      0x376 cpu/br25/tools/sdk.elf.o
  *(.frame_irq_code)
-                0x01e64cd8                . = ALIGN (0x4)
- *fill*         0x01e64cd6        0x2 
+                0x01e651cc                . = ALIGN (0x4)
+ *fill*         0x01e651ca        0x2 
  *(.link_task_const)
  .link_task_const
-                0x01e64cd8        0x8 cpu/br25/tools/sdk.elf.o
+                0x01e651cc        0x8 cpu/br25/tools/sdk.elf.o
  *(.link_task_code)
  .link_task_code
-                0x01e64ce0      0x6e6 cpu/br25/tools/sdk.elf.o
-                0x01e653c8                . = ALIGN (0x4)
- *fill*         0x01e653c6        0x2 
+                0x01e651d4      0x6e6 cpu/br25/tools/sdk.elf.o
+                0x01e658bc                . = ALIGN (0x4)
+ *fill*         0x01e658ba        0x2 
  *(.classic_irq_const)
  *(.classic_irq_code)
-                0x01e653c8                . = ALIGN (0x4)
+                0x01e658bc                . = ALIGN (0x4)
  *(.tws_irq_code)
-                0x01e653c8                . = ALIGN (0x4)
-                0x01e653c8                tws_sync_call_begin = .
+                0x01e658bc                . = ALIGN (0x4)
+                0x01e658bc                tws_sync_call_begin = .
  *(.tws_sync_call)
  .tws_sync_call
-                0x01e653c8       0x18 cpu/br25/tools/sdk.elf.o
-                0x01e653e0                tws_sync_call_end = .
-                0x01e653e0                . = ALIGN (0x4)
-                0x01e653e0                tws_func_stub_begin = .
+                0x01e658bc       0x18 cpu/br25/tools/sdk.elf.o
+                0x01e658d4                tws_sync_call_end = .
+                0x01e658d4                . = ALIGN (0x4)
+                0x01e658d4                tws_func_stub_begin = .
  *(.tws_func_stub)
  .tws_func_stub
-                0x01e653e0        0x8 cpu/br25/tools/sdk.elf.o
-                0x01e653e8                tws_func_stub_end = .
+                0x01e658d4        0x8 cpu/br25/tools/sdk.elf.o
+                0x01e658dc                tws_func_stub_end = .
  *(.tws_media_sync_code)
  *(.tws_media_sync_const)
  *(.tws_data_forward_code)
  *(.tws_data_forward_const)
-                0x01e653e8                . = ALIGN (0x4)
-                0x01e653e8                tws_sync_channel_begin = .
+                0x01e658dc                . = ALIGN (0x4)
+                0x01e658dc                tws_sync_channel_begin = .
  *(.tws_sync_channel.0)
  *(.tws_sync_channel.1)
  *(.tws_sync_channel.2)
@@ -4789,9 +4790,9 @@ END GROUP
  *(.tws_sync_channel.11)
  *(.tws_sync_channel.12)
  *(.tws_sync_channel.13)
-                0x01e653e8                tws_sync_channel_end = .
-                0x01e653e8                btctler_code_end = .
-                0x01e653e8                . = ALIGN (0x4)
+                0x01e658dc                tws_sync_channel_end = .
+                0x01e658dc                btctler_code_end = .
+                0x01e658dc                . = ALIGN (0x4)
                 0x00010000                . = ORIGIN (ram0)
 
 .mmu_tlb        0x00010000      0x9c0
@@ -4816,7 +4817,7 @@ END GROUP
                 0x00011200                _stack_end = .
                 0x00011200                . = ALIGN (0x4)
 
-.data           0x00011200     0x16b8
+.data           0x00011200     0x16bc
                 0x00011200                . = ALIGN (0x4)
  *(.data_magic)
  .data_magic    0x00011200       0x40 cpu/br25/tools/sdk.elf.o
@@ -4824,31 +4825,31 @@ END GROUP
                 0x00011240                . = ALIGN (0x20)
                 0x00011240                . = ALIGN (0x4)
  *(.data*)
- .data          0x00011240      0x360 cpu/br25/tools/sdk.elf.o
+ .data          0x00011240      0x364 cpu/br25/tools/sdk.elf.o
                 0x000114c8                jiffies
  *(.wav_dec_data)
  *(.wav_data)
-                0x000115a0                . = ALIGN (0x4)
-                0x000115a0                btstack_data_start = .
+                0x000115a4                . = ALIGN (0x4)
+                0x000115a4                btstack_data_start = .
  *(.bt_stack_data)
  .bt_stack_data
-                0x000115a0       0xe4 cpu/br25/tools/sdk.elf.o
+                0x000115a4       0xe4 cpu/br25/tools/sdk.elf.o
  *(.ble_db_data)
  *(.ble_sm_data)
  *(.ble_att_data)
  *(.ble_gatt_data)
-                0x00011684                BTSTACK_LE_HOST_MESH_DATA_START = .
-                0x00011684                . = ((. + 0x3) & 0xfffffffc)
-                0x00011684                _net_buf_pool_list = .
+                0x00011688                BTSTACK_LE_HOST_MESH_DATA_START = .
+                0x00011688                . = ((. + 0x3) & 0xfffffffc)
+                0x00011688                _net_buf_pool_list = .
  *(._net_buf_pool.static.*)
  *(.ble_mesh_data)
  *(.ble_mesh_tinycrypt_data)
                 0x00000000                BTSTACK_LE_HOST_MESH_DATA_SIZE = ABSOLUTE ((. - BTSTACK_LE_HOST_MESH_DATA_START))
-                0x00011684                btstack_data_end = .
-                0x00011684                . = ALIGN (0x4)
-                0x00011684                . = ALIGN (0x4)
-                0x00011684                system_data_start = .
-                0x00011684                _video_subdev_begin = .
+                0x00011688                btstack_data_end = .
+                0x00011688                . = ALIGN (0x4)
+                0x00011688                . = ALIGN (0x4)
+                0x00011688                system_data_start = .
+                0x00011688                _video_subdev_begin = .
                 [!provide]                PROVIDE (video_subdev_begin, .)
  *(.video_subdev.0)
  *(.video_subdev.1)
@@ -4856,71 +4857,71 @@ END GROUP
  *(.video_subdev.3)
  *(.video_subdev.4)
  *(.video_subdev.5)
-                0x00011684                _video_subdev_end = .
+                0x00011688                _video_subdev_end = .
                 [!provide]                PROVIDE (video_subdev_end, .)
-                0x00011684                _audio_subdev_begin = .
+                0x00011688                _audio_subdev_begin = .
                 [!provide]                PROVIDE (audio_subdev_begin, .)
  *(.audio_subdev.0)
  *(.audio_subdev.1)
  *(.audio_subdev.2)
  *(.audio_subdev.3)
-                0x00011684                _audio_subdev_end = .
+                0x00011688                _audio_subdev_end = .
                 [!provide]                PROVIDE (audio_subdev_end, .)
-                0x00011684                _iic_device_begin = .
+                0x00011688                _iic_device_begin = .
                 [!provide]                PROVIDE (iic_device_begin, .)
  *(.iic)
-                0x00011684                _iic_device_end = .
+                0x00011688                _iic_device_end = .
                 [!provide]                PROVIDE (iic_device_end, .)
-                0x00011684                _avin_spi_device_begin = .
+                0x00011688                _avin_spi_device_begin = .
                 [!provide]                PROVIDE (avin_spi_device_begin, .)
  *(.sw_spi)
-                0x00011684                _avin_spi_device_end = .
+                0x00011688                _avin_spi_device_end = .
                 [!provide]                PROVIDE (avin_spi_device_end, .)
-                0x00011684                _video_dev_begin = .
+                0x00011688                _video_dev_begin = .
                 [!provide]                PROVIDE (video_dev_begin, .)
  *(.video_device)
-                0x00011684                _video_dev_end = .
+                0x00011688                _video_dev_end = .
                 [!provide]                PROVIDE (video_dev_end, .)
-                0x00011684                _key_driver_ops_begin = .
+                0x00011688                _key_driver_ops_begin = .
                 [!provide]                PROVIDE (key_driver_ops_begin, .)
  *(.key_driver_ops)
-                0x00011684                _key_driver_ops_end = .
+                0x00011688                _key_driver_ops_end = .
                 [!provide]                PROVIDE (key_driver_ops_end, .)
-                0x00011684                _touch_driver_begin = .
+                0x00011688                _touch_driver_begin = .
                 [!provide]                PROVIDE (touch_driver_begin, .)
  *(.touch_driver)
-                0x00011684                _touch_driver_end = .
+                0x00011688                _touch_driver_end = .
                 [!provide]                PROVIDE (touch_driver_end, .)
-                0x00011684                _static_hi_timer_begin = .
+                0x00011688                _static_hi_timer_begin = .
                 [!provide]                PROVIDE (static_hi_timer_begin, .)
  *(.hi_timer)
-                0x00011684                _static_hi_timer_end = .
+                0x00011688                _static_hi_timer_end = .
                 [!provide]                PROVIDE (static_hi_timer_end, .)
-                0x00011684                _sys_cpu_timer_begin = .
-                0x00011684                PROVIDE (sys_cpu_timer_begin, .)
+                0x00011688                _sys_cpu_timer_begin = .
+                0x00011688                PROVIDE (sys_cpu_timer_begin, .)
  *(.sys_cpu_timer)
-                0x00011684                _sys_cpu_timer_end = .
-                0x00011684                PROVIDE (sys_cpu_timer_end, .)
-                0x00011684                _sys_config_begin = .
+                0x00011688                _sys_cpu_timer_end = .
+                0x00011688                PROVIDE (sys_cpu_timer_end, .)
+                0x00011688                _sys_config_begin = .
                 [!provide]                PROVIDE (sys_config_begin, .)
  *(.sys_cfg)
-                0x00011684                _sys_config_end = .
+                0x00011688                _sys_config_end = .
                 [!provide]                PROVIDE (sys_config_end, .)
-                0x00011684                _sys_fat_begin = .
+                0x00011688                _sys_fat_begin = .
                 [!provide]                PROVIDE (sys_fat_begin, .)
  *(.fs_fat)
-                0x00011684                _sys_fat_end = .
+                0x00011688                _sys_fat_end = .
                 [!provide]                PROVIDE (sys_fat_end, .)
-                0x00011684                _app_begin = .
-                0x00011684                PROVIDE (app_begin, .)
+                0x00011688                _app_begin = .
+                0x00011688                PROVIDE (app_begin, .)
  *(.app)
-                0x00011684                _app_end = .
-                0x00011684                PROVIDE (app_end, .)
-                0x00011684                _os_begin = .
+                0x00011688                _app_end = .
+                0x00011688                PROVIDE (app_end, .)
+                0x00011688                _os_begin = .
                 [!provide]                PROVIDE (os_begin, .)
  *(.os_str)
  *(.os_data)
-                0x00011684                _os_end = .
+                0x00011688                _os_end = .
                 [!provide]                PROVIDE (os_end, .)
  *(.crypto_ecdh_data)
  *(.crypto_data)
@@ -4928,39 +4929,39 @@ END GROUP
  *(.os_port_data)
  *(.uECC_data)
  *(.ECDH_sample_data)
-                0x00011684                __movable_slot_start = .
+                0x00011688                __movable_slot_start = .
  *(movable.slot.*)
-                0x00011684                __movable_slot_end = .
-                0x00011684                system_data_end = .
-                0x00011684                . = ALIGN (0x4)
-                0x00011684                media_data_start = .
-                0x00011684                . = ALIGN (0x4)
-                0x00011684                EQ_COEFF_BASE = .
-                0x0001228c                . = (EQ_COEFF_BASE + ((0x4 * EQ_SECTION_NUM) * 0xe))
- *fill*         0x00011684      0x508 
-                0x00011b8c                . = ALIGN (0x4)
+                0x00011688                __movable_slot_end = .
+                0x00011688                system_data_end = .
+                0x00011688                . = ALIGN (0x4)
+                0x00011688                media_data_start = .
+                0x00011688                . = ALIGN (0x4)
+                0x00011688                EQ_COEFF_BASE = .
+                0x00012290                . = (EQ_COEFF_BASE + ((0x4 * EQ_SECTION_NUM) * 0xe))
+ *fill*         0x00011688      0x508 
+                0x00011b90                . = ALIGN (0x4)
  *(.jlsp_data)
-                0x00011b8c                . = ALIGN (0x4)
+                0x00011b90                . = ALIGN (0x4)
  *(.dns_common_data)
  *(.dns_param_data_single)
  *(.dns_param_data_dual)
-                0x00011b8c                . = ALIGN (0x4)
+                0x00011b90                . = ALIGN (0x4)
  *(.aec_data)
- .aec_data      0x00011b8c       0x54 cpu/br25/tools/sdk.elf.o
-                0x00011be0                . = ALIGN (0x4)
+ .aec_data      0x00011b90       0x54 cpu/br25/tools/sdk.elf.o
+                0x00011be4                . = ALIGN (0x4)
  *(.res_data)
-                0x00011be0                . = ALIGN (0x4)
+                0x00011be4                . = ALIGN (0x4)
  *(.ns_data)
- .ns_data       0x00011be0       0x38 cpu/br25/tools/sdk.elf.o
-                0x00011c18                . = ALIGN (0x4)
+ .ns_data       0x00011be4       0x38 cpu/br25/tools/sdk.elf.o
+                0x00011c1c                . = ALIGN (0x4)
  *(.der_data)
-                0x00011c18                . = ALIGN (0x4)
+                0x00011c1c                . = ALIGN (0x4)
  *(.nlp_data)
-                0x00011c18                . = ALIGN (0x4)
+                0x00011c1c                . = ALIGN (0x4)
  *(.qmf_data)
-                0x00011c18                . = ALIGN (0x4)
+                0x00011c1c                . = ALIGN (0x4)
  *(.fft_data)
-                0x00011c18                . = ALIGN (0x4)
+                0x00011c1c                . = ALIGN (0x4)
  *(.bt_audioplc_data)
  *(.sms_data)
  *(.pcm_data)
@@ -4973,11 +4974,11 @@ END GROUP
  *(.mp3_data)
  *(.mp3_dec_data)
  *(.msbc_data)
- .msbc_data     0x00011c18        0x4 cpu/br25/tools/sdk.elf.o
+ .msbc_data     0x00011c1c        0x4 cpu/br25/tools/sdk.elf.o
  *(.mty_data)
  *(.mp3tsy_dec_data)
  *(.sbc_data)
- .sbc_data      0x00011c1c        0x4 cpu/br25/tools/sdk.elf.o
+ .sbc_data      0x00011c20        0x4 cpu/br25/tools/sdk.elf.o
  *(.sine_data)
  *(.wma_data)
  *(.wma_dec_data)
@@ -5006,7 +5007,7 @@ END GROUP
  *(.audio_buf_sync_data)
  *(.audio_dec_app_data)
  .audio_dec_app_data
-                0x00011c20        0x8 cpu/br25/tools/sdk.elf.o
+                0x00011c24        0x8 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_app_sync_data)
  *(.audio_dig_vol_data)
  *(.audio_echo_reverb_data)
@@ -5018,10 +5019,10 @@ END GROUP
  *(.audio_energy_detect_data)
  *(.audio_eq_data)
  .audio_eq_data
-                0x00011c28       0x7c cpu/br25/tools/sdk.elf.o
+                0x00011c2c       0x7c cpu/br25/tools/sdk.elf.o
  *(.audio_drc_data)
  .audio_drc_data
-                0x00011ca4        0x8 cpu/br25/tools/sdk.elf.o
+                0x00011ca8        0x8 cpu/br25/tools/sdk.elf.o
  *(.audio_eq_drc_apply_data)
  *(.audio_equalloudness_data)
  *(.audio_howling_data)
@@ -5029,7 +5030,7 @@ END GROUP
  *(.audio_noisegate_data)
  *(.audio_output_dac_data)
  .audio_output_dac_data
-                0x00011cac        0x4 cpu/br25/tools/sdk.elf.o
+                0x00011cb0        0x4 cpu/br25/tools/sdk.elf.o
  *(.audio_pemafrow_data)
  *(.audio_pitch_data)
  *(.audio_pitchspeed_data)
@@ -5045,7 +5046,7 @@ END GROUP
  *(.audio_dec_localtws_data)
  *(.audio_dec_a2dp_data)
  .audio_dec_a2dp_data
-                0x00011cb0        0x8 cpu/br25/tools/sdk.elf.o
+                0x00011cb4        0x8 cpu/br25/tools/sdk.elf.o
  *(.audio_dec_esco_data)
  *(.audio_dec_file_data)
  *(.audio_dec_pcm_data)
@@ -5058,17 +5059,17 @@ END GROUP
  *(.speex_encoder_data)
  *(.sbc_encoder_data)
  .sbc_encoder_data
-                0x00011cb8        0x4 cpu/br25/tools/sdk.elf.o
+                0x00011cbc        0x4 cpu/br25/tools/sdk.elf.o
  *(.opus_encoder_data)
  *(.prevent_task_fill_data)
  *(.audio_cfifo_data)
  *(.audio_track_data)
  *(.audio_adc_data)
  .audio_adc_data
-                0x00011cbc        0x4 cpu/br25/tools/sdk.elf.o
+                0x00011cc0        0x4 cpu/br25/tools/sdk.elf.o
  *(.audio_dac_data)
  .audio_dac_data
-                0x00011cc0        0x8 cpu/br25/tools/sdk.elf.o
+                0x00011cc4        0x8 cpu/br25/tools/sdk.elf.o
  *(.audio_linein_data)
  *(.audio_link_data)
  *(.audio_sample_sync_data)
@@ -5077,23 +5078,23 @@ END GROUP
  *(.audio_src_data)
  *(.audio_src_base_data)
  .audio_src_base_data
-                0x00011cc8       0x60 cpu/br25/tools/sdk.elf.o
+                0x00011ccc       0x60 cpu/br25/tools/sdk.elf.o
  *(.effectrs_sync_data)
  *(.eq_design_data)
  *(.hw_eq_data)
  *(.iic_data)
  *(.mic_cap_data)
- .mic_cap_data  0x00011d28        0x2 cpu/br25/tools/sdk.elf.o
+ .mic_cap_data  0x00011d2c        0x2 cpu/br25/tools/sdk.elf.o
  *(.sbc_hwaccel_data)
- *fill*         0x00011d2a        0x2 
+ *fill*         0x00011d2e        0x2 
  .sbc_hwaccel_data
-                0x00011d2c       0x58 cpu/br25/tools/sdk.elf.o
+                0x00011d30       0x58 cpu/br25/tools/sdk.elf.o
  *(.resample_fastcal_data)
  *(.aac_data)
  *(.alac_data)
-                0x00011d84                . = ALIGN (0x4)
+                0x00011d88                . = ALIGN (0x4)
  *(.dec2tws_mem)
-                0x00011d84                . = ALIGN (0x4)
+                0x00011d88                . = ALIGN (0x4)
  *(.midi_mem)
  *(.midi_ctrl_mem)
  *(.lfwordana_data)
@@ -5103,46 +5104,46 @@ END GROUP
  *(.sur_TYPE0_cal_data)
  *(.sur_TYPE1_cal_data)
  *(.sur_LRDRIFT_cal_data)
-                0x00011d84                media_data_end = .
-                0x00011d84                . = ALIGN (0x4)
-                0x00011d84                EQ_COEFF_BASE = .
-                0x0001228c                . = (EQ_COEFF_BASE + ((0x4 * EQ_SECTION_NUM) * 0xe))
- *fill*         0x00011d84      0x508 
-                0x0001228c                . = ALIGN (0x4)
-                0x0001228c                update_data_start = .
-                0x0001228c                update_data_end = .
-                0x0001228c                driver_data_start = .
-                0x0001228c                CLOCK_DATA_START = .
+                0x00011d88                media_data_end = .
+                0x00011d88                . = ALIGN (0x4)
+                0x00011d88                EQ_COEFF_BASE = .
+                0x00012290                . = (EQ_COEFF_BASE + ((0x4 * EQ_SECTION_NUM) * 0xe))
+ *fill*         0x00011d88      0x508 
+                0x00012290                . = ALIGN (0x4)
+                0x00012290                update_data_start = .
+                0x00012290                update_data_end = .
+                0x00012290                driver_data_start = .
+                0x00012290                CLOCK_DATA_START = .
  *(.clock_data)
- .clock_data    0x0001228c       0x54 cpu/br25/tools/sdk.elf.o
+ .clock_data    0x00012290       0x54 cpu/br25/tools/sdk.elf.o
                 0x00000054                CLOCK_DATA_SIZE = ABSOLUTE ((. - CLOCK_DATA_START))
  *(.debug_data)
  *(.power_data)
  *(.uart_data)
-                0x000122e0                driver_data_end = .
-                0x000122e0                . = ALIGN (0x4)
-                0x000122e0                btctler_data_start = .
-                0x000122e0                BTCTLER_CONTROLLER_DATA_START = .
+                0x000122e4                driver_data_end = .
+                0x000122e4                . = ALIGN (0x4)
+                0x000122e4                btctler_data_start = .
+                0x000122e4                BTCTLER_CONTROLLER_DATA_START = .
  *(.bt_rf_data)
- .bt_rf_data    0x000122e0      0x441 cpu/br25/tools/sdk.elf.o
+ .bt_rf_data    0x000122e4      0x441 cpu/br25/tools/sdk.elf.o
  *(.vendor_manager_data)
  *(.device_manager_data)
  *(.hci_controller_data)
- *fill*         0x00012721        0x3 
+ *fill*         0x00012725        0x3 
  .hci_controller_data
-                0x00012724       0xbc cpu/br25/tools/sdk.elf.o
+                0x00012728       0xbc cpu/br25/tools/sdk.elf.o
  *(.hci_interface_data)
                 0x00000500                BTCTLER_CONTROLLER_DATA_SIZE = ABSOLUTE ((. - BTCTLER_CONTROLLER_DATA_START))
-                0x000127e0                BTCTLER_LE_CONTROLLER_DATA_START = .
+                0x000127e4                BTCTLER_LE_CONTROLLER_DATA_START = .
  *(.ble_ll_data)
  *(.ble_hci_data)
  *(.classic_hci_data)
  *(.ble_rf_data)
                 0x00000000                BTCTLER_LE_CONTROLLER_DATA_SIZE = ABSOLUTE ((. - BTCTLER_LE_CONTROLLER_DATA_START))
-                0x000127e0                BTCTLER_CL_DATA_START = .
+                0x000127e4                BTCTLER_CL_DATA_START = .
  *(.classic_lmp_data)
  .classic_lmp_data
-                0x000127e0       0xbc cpu/br25/tools/sdk.elf.o
+                0x000127e4       0xbc cpu/br25/tools/sdk.elf.o
  *(.classic_lmp_auth_data)
  *(.classic_lmp_bigint_data)
  *(.classic_lmp_crypt_data)
@@ -5151,12 +5152,12 @@ END GROUP
  *(.classic_lmp_hmac_data)
  *(.classic_rf_data)
  .classic_rf_data
-                0x0001289c       0x1a cpu/br25/tools/sdk.elf.o
+                0x000128a0       0x1a cpu/br25/tools/sdk.elf.o
  *(.classic_bb_data)
                 0x000000d6                BTCTLER_CL_DATA_SIZE = ABSOLUTE ((. - BTCTLER_CL_DATA_START))
-                0x000128b8                . = ALIGN (0x4)
- *fill*         0x000128b6        0x2 
-                0x000128b8                btctler_data_end = .
+                0x000128bc                . = ALIGN (0x4)
+ *fill*         0x000128ba        0x2 
+                0x000128bc                btctler_data_end = .
 
 .bss            0x000128c0     0x43a8
  *(.usb_h_dma)
@@ -5326,27 +5327,27 @@ END GROUP
  *(.wav_dec_bss)
  *(.bss)
  *fill*         0x00014f14        0xc 
- .bss           0x00014f20     0x166c cpu/br25/tools/sdk.elf.o
+ .bss           0x00014f20     0x1674 cpu/br25/tools/sdk.elf.o
                 0x00015168                CurrentTCB
-                0x0001658c                . = ALIGN (0x4)
+                0x00016594                . = ALIGN (0x4)
  *(.dts_dec_bss)
  *(.dts_bss)
-                0x0001658c                . = ALIGN (0x4)
+                0x00016594                . = ALIGN (0x4)
  *(.m4a_dec_bss)
  *(.m4a_bss)
-                0x0001658c                . = ALIGN (0x4)
+                0x00016594                . = ALIGN (0x4)
  *(COMMON)
  *(.volatile_ram)
  *(.audio_play_dma)
-                0x0001658c                . = ALIGN (0x4)
+                0x00016594                . = ALIGN (0x4)
  *(.src_filt)
  *(.src_dma)
-                0x0001658c                . = ALIGN (0x4)
+                0x00016594                . = ALIGN (0x4)
  *(.non_volatile_ram)
  .non_volatile_ram
-                0x0001658c      0x188 cpu/br25/tools/sdk.elf.o
+                0x00016594      0x188 cpu/br25/tools/sdk.elf.o
                 0x00016720                . = ALIGN (0x20)
- *fill*         0x00016714        0xc 
+ *fill*         0x0001671c        0x4 
                 0x00016720                update_bss_start = .
  *(.update_bss)
  .update_bss    0x00016720      0x204 cpu/br25/tools/sdk.elf.o
@@ -5700,43 +5701,43 @@ END GROUP
                 0x0000f518                BTCTLER_CODE_TOTAL = (btctler_code_end - btctler_code_start)
                 0x00000001                ASSERT ((__movable_region1_size <= 0x3430), __movable_region1_size > CONFIG_FM_MOVABLE_CODE_SIZE, Please modify CONFIG_FM_MOVABLE_CODE_SIZE)
                 0x01e00100                text_begin = ADDR (.text)
-                0x000652e8                text_size = SIZEOF (.text)
-                0x01e653e8                text_end = (ADDR (.text) + SIZEOF (.text))
+                0x000657dc                text_size = SIZEOF (.text)
+                0x01e658dc                text_end = (ADDR (.text) + SIZEOF (.text))
                 0x000128c0                bss_begin = ADDR (.bss)
                 0x000043a8                bss_size = SIZEOF (.bss)
                 0x00016c68                bss_end = (bss_begin + bss_size)
                 0x00011200                data_addr = ADDR (.data)
-                0x01e653e8                data_begin = (text_begin + text_size)
-                0x000016b8                data_size = SIZEOF (.data)
+                0x01e658dc                data_begin = (text_begin + text_size)
+                0x000016bc                data_size = SIZEOF (.data)
                 0x00016c80                data_code_addr = ADDR (.data_code)
-                0x01e66aa0                data_code_begin = (data_begin + data_size)
+                0x01e66f98                data_code_begin = (data_begin + data_size)
                 0x00001368                data_code_size = SIZEOF (.data_code)
                 0x00017fe8                aec_addr = ADDR (.overlay_aec)
-                0x01e67e08                aec_begin = (data_code_begin + data_code_size)
+                0x01e68300                aec_begin = (data_code_begin + data_code_size)
                 0x00000306                aec_size = (o_aec_end - aec_addr)
                 0x00017fe8                wav_addr = ADDR (.overlay_wav)
-                0x01e6810e                wav_begin = (aec_begin + aec_size)
+                0x01e68606                wav_begin = (aec_begin + aec_size)
                 0x00000004                wav_size = (o_wav_end - wav_addr)
                 0x00017fe8                ape_addr = ADDR (.overlay_ape)
-                0x01e68112                ape_begin = (wav_begin + wav_size)
+                0x01e6860a                ape_begin = (wav_begin + wav_size)
                 0x00000004                ape_size = (o_ape_end - ape_addr)
                 0x00017fe8                flac_addr = ADDR (.overlay_flac)
-                0x01e68116                flac_begin = (ape_begin + ape_size)
+                0x01e6860e                flac_begin = (ape_begin + ape_size)
                 0x00000004                flac_size = (o_flac_end - flac_addr)
                 0x00017fe8                m4a_addr = ADDR (.overlay_m4a)
-                0x01e6811a                m4a_begin = (flac_begin + flac_size)
+                0x01e68612                m4a_begin = (flac_begin + flac_size)
                 0x00000004                m4a_size = (o_m4a_end - m4a_addr)
                 0x00017fe8                amr_addr = ADDR (.overlay_amr)
-                0x01e6811e                amr_begin = (m4a_begin + m4a_size)
+                0x01e68616                amr_begin = (m4a_begin + m4a_size)
                 0x00000004                amr_size = (o_amr_end - amr_addr)
                 0x00017fe8                dts_addr = ADDR (.overlay_dts)
-                0x01e68122                dts_begin = (amr_begin + amr_size)
+                0x01e6861a                dts_begin = (amr_begin + amr_size)
                 0x00000004                dts_size = (o_dts_end - dts_addr)
                 0x00017fe8                fm_addr = ADDR (.overlay_fm)
-                0x01e68126                fm_begin = (dts_begin + dts_size)
+                0x01e6861e                fm_begin = (dts_begin + dts_size)
                 0x00000004                fm_size = (o_fm_end - fm_addr)
-                0x01e6812a                overlay_code_end_addr = (fm_begin + fm_size)
-                0x01e6812a                bank_code_load_addr = overlay_code_end_addr
+                0x01e68622                overlay_code_end_addr = (fm_begin + fm_size)
+                0x01e68622                bank_code_load_addr = overlay_code_end_addr
                 0x0001dc04                PROVIDE (HEAP_BEGIN, _HEAP_BEGIN)
                 0x00031ae0                PROVIDE (HEAP_END, _HEAP_END)
                 0x00013edc                _MALLOC_SIZE = (_HEAP_END - _HEAP_BEGIN)
@@ -5747,27 +5748,27 @@ LOAD C:/JL/pi32/pi32v2-lib/r3/libm.a
 LOAD C:/JL/pi32/pi32v2-lib/r3/libcompiler-rt.a
 OUTPUT(cpu/br25/tools/sdk.elf elf32-pi32v2)
 
-.debug_str      0x00000000    0x55f4b
- .debug_str     0x00000000    0x555a9 cpu/br25/tools/sdk.elf.o
-                              0x5b0ee (size before relaxing)
- .debug_str     0x000555a9      0x358 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+.debug_str      0x00000000    0x56010
+ .debug_str     0x00000000    0x5566e cpu/br25/tools/sdk.elf.o
+                              0x5b1be (size before relaxing)
+ .debug_str     0x0005566e      0x358 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
                                 0x457 (size before relaxing)
- .debug_str     0x00055901      0x286 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_str     0x000559c6      0x286 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
                                 0x62f (size before relaxing)
- .debug_str     0x00055b87       0xaa include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_str     0x00055c4c       0xaa include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
                                 0x42e (size before relaxing)
- .debug_str     0x00055c31      0x25d include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_str     0x00055cf6      0x25d include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
                                 0x4a5 (size before relaxing)
- .debug_str     0x00055e8e       0xbd include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+ .debug_str     0x00055f53       0xbd include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
                                 0x458 (size before relaxing)
 
-.debug_loc      0x00000000    0x3e232
- .debug_loc     0x00000000    0x3cfcf cpu/br25/tools/sdk.elf.o
- .debug_loc     0x0003cfcf      0x105 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
- .debug_loc     0x0003d0d4      0x844 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
- .debug_loc     0x0003d918      0x468 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
- .debug_loc     0x0003dd80      0x162 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
- .debug_loc     0x0003dee2      0x350 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+.debug_loc      0x00000000    0x3e517
+ .debug_loc     0x00000000    0x3d2b4 cpu/br25/tools/sdk.elf.o
+ .debug_loc     0x0003d2b4      0x105 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+ .debug_loc     0x0003d3b9      0x844 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_loc     0x0003dbfd      0x468 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_loc     0x0003e065      0x162 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_loc     0x0003e1c7      0x350 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
 .debug_abbrev   0x00000000     0x18f2
  .debug_abbrev  0x00000000     0x1094 cpu/br25/tools/sdk.elf.o
@@ -5780,25 +5781,25 @@ OUTPUT(cpu/br25/tools/sdk.elf elf32-pi32v2)
  .debug_abbrev  0x000015d6      0x17e include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
  .debug_abbrev  0x00001754      0x19e include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
-.debug_info     0x00000000   0x102d68
- .debug_info    0x00000000   0x100132 cpu/br25/tools/sdk.elf.o
- .debug_info    0x00100132      0x20b include_lib/liba/br25/cpu.a(startup.S.o)
- .debug_info    0x0010033d      0x189 include_lib/liba/br25/system.a(movable.S.o)
- .debug_info    0x001004c6      0x1d4 include_lib/liba/br25/system.a(port_asm_mmu.S.o)
- .debug_info    0x0010069a      0x701 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
- .debug_info    0x00100d9b      0xb7c include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
- .debug_info    0x00101917      0x73c include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
- .debug_info    0x00102053      0x6b3 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
- .debug_info    0x00102706      0x662 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+.debug_info     0x00000000   0x1031da
+ .debug_info    0x00000000   0x1005a4 cpu/br25/tools/sdk.elf.o
+ .debug_info    0x001005a4      0x20b include_lib/liba/br25/cpu.a(startup.S.o)
+ .debug_info    0x001007af      0x189 include_lib/liba/br25/system.a(movable.S.o)
+ .debug_info    0x00100938      0x1d4 include_lib/liba/br25/system.a(port_asm_mmu.S.o)
+ .debug_info    0x00100b0c      0x701 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+ .debug_info    0x0010120d      0xb7c include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_info    0x00101d89      0x73c include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_info    0x001024c5      0x6b3 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_info    0x00102b78      0x662 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
-.debug_ranges   0x00000000     0x6958
- .debug_ranges  0x00000000     0x68c0 cpu/br25/tools/sdk.elf.o
- .debug_ranges  0x000068c0       0x28 include_lib/liba/br25/cpu.a(startup.S.o)
- .debug_ranges  0x000068e8       0x28 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
- .debug_ranges  0x00006910       0x18 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
- .debug_ranges  0x00006928       0x18 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
- .debug_ranges  0x00006940       0x18 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
- .debug_ranges  0x00006958        0x0 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+.debug_ranges   0x00000000     0x69a8
+ .debug_ranges  0x00000000     0x6910 cpu/br25/tools/sdk.elf.o
+ .debug_ranges  0x00006910       0x28 include_lib/liba/br25/cpu.a(startup.S.o)
+ .debug_ranges  0x00006938       0x28 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+ .debug_ranges  0x00006960       0x18 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_ranges  0x00006978       0x18 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_ranges  0x00006990       0x18 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_ranges  0x000069a8        0x0 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
 .debug_macinfo  0x00000000        0x6
  .debug_macinfo
@@ -5815,19 +5816,19 @@ OUTPUT(cpu/br25/tools/sdk.elf elf32-pi32v2)
                 0x00000005        0x1 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
 .debug_pubnames
-                0x00000000    0x26bb3
+                0x00000000    0x26c86
  .debug_pubnames
-                0x00000000    0x26726 cpu/br25/tools/sdk.elf.o
+                0x00000000    0x267f9 cpu/br25/tools/sdk.elf.o
  .debug_pubnames
-                0x00026726       0xae include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+                0x000267f9       0xae include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
  .debug_pubnames
-                0x000267d4      0x21b include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+                0x000268a7      0x21b include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
  .debug_pubnames
-                0x000269ef       0x78 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+                0x00026ac2       0x78 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
  .debug_pubnames
-                0x00026a67       0xb5 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+                0x00026b3a       0xb5 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
  .debug_pubnames
-                0x00026b1c       0x97 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+                0x00026bef       0x97 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
 .debug_pubtypes
                 0x00000000    0x1e453
@@ -5844,29 +5845,29 @@ OUTPUT(cpu/br25/tools/sdk.elf elf32-pi32v2)
  .debug_pubtypes
                 0x0001e364       0xef include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
-.debug_frame    0x00000000    0x11514
- .debug_frame   0x00000000    0x111bc cpu/br25/tools/sdk.elf.o
- .debug_frame   0x000111bc       0xe0 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
- .debug_frame   0x0001129c      0x114 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
- .debug_frame   0x000113b0       0x48 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
- .debug_frame   0x000113f8       0xb8 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
- .debug_frame   0x000114b0       0x64 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+.debug_frame    0x00000000    0x1153c
+ .debug_frame   0x00000000    0x111e4 cpu/br25/tools/sdk.elf.o
+ .debug_frame   0x000111e4       0xe0 include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+ .debug_frame   0x000112c4      0x114 include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_frame   0x000113d8       0x48 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_frame   0x00011420       0xb8 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_frame   0x000114d8       0x64 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
-.debug_line     0x00000000    0x6db66
- .debug_line    0x00000000    0x6c365 cpu/br25/tools/sdk.elf.o
- .debug_line    0x0006c365       0x30 objs/apps/soundbox/sdk_version.z.S.o
- .debug_line    0x0006c395      0x108 include_lib/liba/br25/cpu.a(startup.S.o)
- .debug_line    0x0006c49d       0xb3 include_lib/liba/br25/system.a(movable.S.o)
- .debug_line    0x0006c550       0xb2 include_lib/liba/br25/system.a(port_asm_mmu.S.o)
- .debug_line    0x0006c602       0x2c include_lib/liba/br25/btstack.a(version.z.o)
- .debug_line    0x0006c62e       0x2c include_lib/liba/br25/btctrler.a(version.z.o)
- .debug_line    0x0006c65a       0x2c include_lib/liba/br25/media.a(version.z.o)
- .debug_line    0x0006c686       0x2c include_lib/liba/br25/update.a(version.z.o)
- .debug_line    0x0006c6b2      0x31e include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
- .debug_line    0x0006c9d0      0x7ff include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
- .debug_line    0x0006d1cf      0x324 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
- .debug_line    0x0006d4f3      0x1c4 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
- .debug_line    0x0006d6b7      0x4af include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
+.debug_line     0x00000000    0x6de9b
+ .debug_line    0x00000000    0x6c69a cpu/br25/tools/sdk.elf.o
+ .debug_line    0x0006c69a       0x30 objs/apps/soundbox/sdk_version.z.S.o
+ .debug_line    0x0006c6ca      0x108 include_lib/liba/br25/cpu.a(startup.S.o)
+ .debug_line    0x0006c7d2       0xb3 include_lib/liba/br25/system.a(movable.S.o)
+ .debug_line    0x0006c885       0xb2 include_lib/liba/br25/system.a(port_asm_mmu.S.o)
+ .debug_line    0x0006c937       0x2c include_lib/liba/br25/btstack.a(version.z.o)
+ .debug_line    0x0006c963       0x2c include_lib/liba/br25/btctrler.a(version.z.o)
+ .debug_line    0x0006c98f       0x2c include_lib/liba/br25/media.a(version.z.o)
+ .debug_line    0x0006c9bb       0x2c include_lib/liba/br25/update.a(version.z.o)
+ .debug_line    0x0006c9e7      0x31e include_lib/liba/br25/lib_mp2_code.a(mp2code_main.o)
+ .debug_line    0x0006cd05      0x7ff include_lib/liba/br25/lib_mp2_code.a(encodemp2.o)
+ .debug_line    0x0006d504      0x324 include_lib/liba/br25/lib_mp2_code.a(mp2dsp.o)
+ .debug_line    0x0006d828      0x1c4 include_lib/liba/br25/lib_adpcm_code.a(en_adpcm_main.o)
+ .debug_line    0x0006d9ec      0x4af include_lib/liba/br25/lib_adpcm_code.a(en_adpcm.o)
 
 .debug_aranges  0x00000000       0x68
  .debug_aranges
